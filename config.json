@@ -1,0 +1,7 @@
+{
+   "database": {
+      "host": "sef.rmit.matthayward.com.au",
+      "db": "supermarket",
+      "port": 28015
+   }
+}

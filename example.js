@@ -14,7 +14,6 @@ function bob(){
 
 var items = require("./items.js");
 items.add({id: 100, name: "Pink Lady Apple", price: 10.40}, function(err){
+
   
 });
-
-
