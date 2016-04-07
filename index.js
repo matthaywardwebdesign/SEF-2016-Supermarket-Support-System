@@ -18,17 +18,21 @@ db.connect(function(err){
       //Search by name
       items.getItemByName("Bananasfs", function (err, item){
          if (err){
-            console.log(err);
+            //console.log(err);
          } else {
             item.getDetails(function(err, details){
-               console.log(details);
+               //console.log(details);
             });
          }
       });
       //Get by id
       var item = new Item(311211);
-      item.getDetails(function(err, details){
-         console.log(details);
+      item.getPrice(function(err, price){
+         if (err){
+            console.log(err);
+         } else {
+            console.log("Price of item is $" + price);
+         }
       });
    }
 });
