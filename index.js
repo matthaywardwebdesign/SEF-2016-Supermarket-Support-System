@@ -2,6 +2,7 @@ var db = require("./lib/db.js");
 var items = require("./lib/items.js");
 var Item = require("./lib/item.js");
 var r = db.getLibrary();
+var error = require("./lib/error.js");
 
 //Connect to the database
 //note - RMIT blocks the port used by RethinkDB, run this code on the server
@@ -15,14 +16,18 @@ var r = db.getLibrary();
 db.connect(function(err){
    if (!err){
       //Search by name
-      items.getItemByName("Banana", function (item){
-         item.getDetails(function(details){
-            console.log(details);
-         });
+      items.getItemByName("Bananasfs", function (err, item){
+         if (err){
+            console.log(err);
+         } else {
+            item.getDetails(function(err, details){
+               console.log(details);
+            });
+         }
       });
       //Get by id
       var item = new Item(311211);
-      item.getDetails(function(details){
+      item.getDetails(function(err, details){
          console.log(details);
       });
    }
