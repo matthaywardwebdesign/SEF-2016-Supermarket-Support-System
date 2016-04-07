@@ -1,4 +1,6 @@
 var db = require("./lib/db.js");
+var items = require("./lib/items.js");
+var Item = require("./lib/item.js");
 var r = db.getLibrary();
 
 //Connect to the database
@@ -12,11 +14,16 @@ var r = db.getLibrary();
 
 db.connect(function(err){
    if (!err){
-      //We have successfully connected to the database
-      var conn = db.getConnection();
-      r.table("items").count().run(conn, function (err, result){
-         console.log("Total items: " + result);
-         process.exit(0);
+      //Search by name
+      items.getItemByName("Banana", function (item){
+         item.getDetails(function(details){
+            console.log(details);
+         });
+      });
+      //Get by id
+      var item = new Item(311211);
+      item.getDetails(function(details){
+         console.log(details);
       });
    }
 });
