@@ -15,24 +15,11 @@ var error = require("./lib/error.js");
 
 db.connect(function(err){
    if (!err){
-      //Search by name
-      items.getItemByName("Bananasfs", function (err, item){
-         if (err){
-            //console.log(err);
-         } else {
-            item.getDetails(function(err, details){
-               //console.log(details);
-            });
-         }
+      items.getItemByID(311211, function (err, item){
+         console.log(item);
       });
-      //Get by id
-      var item = new Item(311211);
-      item.getPrice(function(err, price){
-         if (err){
-            console.log(err);
-         } else {
-            console.log("Price of item is $" + price);
-         }
+      items.getAllItems(function (err, items){
+         console.log(items);
       });
    }
 });
