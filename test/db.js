@@ -4,6 +4,7 @@ var db = require("../lib/db.js");
 // any test in this file is run and then once all the tests have been run
 // because nodeunit didn't support it
 var tests = require("../lib/tests.js");
+tests.reset();
 
 tests.before = function(done){
    db.connect(function(result){
