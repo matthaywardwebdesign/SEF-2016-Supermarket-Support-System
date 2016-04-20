@@ -61,3 +61,38 @@ module.exports.testGetDate = function(test){
    test.equal(transaction.getDate(), testData.date, "Failed to get date of transaction");
    test.done();
 }
+
+   module.exports.testGetGst = function(test){
+   var transaction = new Transaction(testData);
+   test.expect(1);
+   test.equal(transaction.getGst(), testData.gst, "Failed to get item Gst");
+   test.done();
+}
+
+   module.exports.testGetPaymentType = function(test){
+   var transaction = new Transaction(testData);
+   test.expect(1);
+   test.equal(transaction.getPaymentType(), testData.paymentType, "Failed to get item Payment Type");
+   test.done();
+}
+
+   module.exports.testGetBulkDiscount = function(test){
+   var transaction = new Transaction(testData);
+   test.expect(1);
+   test.equal(transaction.getBulkDiscount(), testData.totalBulkDiscount, "Failed to get item Bulk Discount");
+   test.done();
+}
+
+   module.exports.testGetNoTransactionItems = function(test){
+   var transaction = new Transaction(testData);
+   test.expect(1);
+   test.equal(transaction.getNoTransactionItems(), testData.noTransactionItems, "Failed to get item No Transaction Items");
+   test.done();
+}
+
+   module.exports.testGetTotal = function(test){
+   var transaction = new Transaction(testData);
+   test.expect(1);
+   test.equal(transaction.getTotal(), testData.total, "Failed to get item Total");
+   test.done();
+}
