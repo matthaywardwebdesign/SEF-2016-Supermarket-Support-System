@@ -166,5 +166,31 @@ module.exports.testGetItemByEAN = function(test){
       test.done();
    });
 }
+/*Need help fixing 
+module.exports.testDeleteItemByID = function(test){
+   test.expect(1);
+   items.deleteItemByID(testData.id, function (err, item){
+      test.equal(item,null,"Failed to delete an item");
+      test.done();
+   });
+}
+
+module.exports.testDeleteItem = function(test){
+   test.expect(1);
+   items.deleteItem(testData, function (err, item){
+      test.equal(item,null,"Failed to delete an item");
+      test.done();
+   });
+}
+
+
+module.exports.testgetAllItems = function(test){
+   test.expect(1);
+   items.getAllItems(testData, function (err, item){
+      test.equal(items, 1,"Failed to list all items");
+      test.done();
+   });
+}*/
+
 
 tests.load(module.exports);
