@@ -187,7 +187,7 @@ module.exports.testDeleteItem = function(test){
 module.exports.testgetAllItems = function(test){
    test.expect(1);
    items.getAllItems(function (err, items){
-      test.ok(items.length > 1,"Failed to list all items");
+      test.ok(items.length > 0,"Failed to list all items");
       test.done();
    });
 }

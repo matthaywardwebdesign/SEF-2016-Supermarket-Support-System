@@ -6,7 +6,7 @@ var transactions = require("../lib/transactions.js");
 var Transaction = require("../lib/transaction.js");
 
 var testData = {
-   "transactionNo":40,
+   "id":40,
    "customerNo":55,
    "date": "Thu Apr 21 2016 10:08:05 GMT+1000 (AEST)",
    "gst":2.90,
@@ -30,7 +30,7 @@ tests.beforeEach = function(done){
 }
 
 tests.after = function(done){
-   transactions.deleteTransactionByNumber(testData.transactionNo, function(){
+   transactions.deleteTransactionByID(testData.id, function(){
       var conn = db.getConnection();
       conn.close();
       done();
@@ -41,10 +41,10 @@ tests.afterEach = function(done){
    done();
 }
 
-module.exports.testGetTransactionNo = function(test){
+module.exports.testGetTransactionID = function(test){
    var transaction = new Transaction(testData);
    test.expect(1);
-   test.equal(transaction.getTransactionNo(), testData.transactionNo, "Failed to get transaction number");
+   test.equal(transaction.getID(), testData.id, "Failed to get transaction number");
    test.done();
 }
 
