@@ -17,25 +17,15 @@ var Transaction = require("./lib/transaction.js");
 
 db.connect(function(err){
    if (!err){
-      var item = new Item({
-         "ean": 4011 ,
-         "id": 133211 ,
-         "isWeighted": true ,
-         "name":  "Banana Cavendish" ,
-         "price": 2.7 ,
-         "soh": 0
-      });
-
-      items.saveItem(item, function (err){
-         var t = new Transaction({
-            "transactionNo":40,
-            "customerNo":55,
-            "date": new Date().toString(),
+      var t = new Transaction({"id":1, "customerNo": 1, "date": new Date()});
+      t.addItemByID(133211, 2.5);
+      t.addItemByID(12345, 2);
+      t.getItems(function(result){
+         var total = 0.0;
+         result.forEach(function(data){
+            total+= (data.item.price * data.qty);
          });
-         t.addItem(item);
-         transactions.saveTransaction(t, function (err){
-            console.log("Transaction saved");
-         });
+         console.log("Total price for this transaction: " + total);
       })
    }
 });
