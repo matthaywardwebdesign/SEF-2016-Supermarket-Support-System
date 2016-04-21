@@ -4,6 +4,8 @@ var error = require("../lib/error.js");
 tests.reset();
 var transactions = require("../lib/transactions.js");
 var Transaction = require("../lib/transaction.js");
+var items = require("../lib/items.js");
+var Item = require("../lib/item.js");
 
 var testData = {
    "id":40,
@@ -16,6 +18,15 @@ var testData = {
    "total":0.00
 }
 
+var testItemData = {
+   "id":1,
+   "name":"Test Banana",
+   "isWeighted": true,
+   "price":2.90,
+   "ean":4011,
+   "soh":0
+}
+
 tests.before = function(done){
    db.connect(function(result){
       done();
@@ -24,9 +35,13 @@ tests.before = function(done){
 
 tests.beforeEach = function(done){
    var transaction = new Transaction(testData);
+   var item = new Item(testItemData);
    transactions.saveTransaction(transaction, function(){
-      done();
+      items.saveItem(item, function(){
+         done();
+      });
    });
+
 }
 
 tests.after = function(done){
@@ -96,5 +111,15 @@ module.exports.testGetTotal = function(test){
    test.equal(transaction.getTotal(), testData.total, "Failed to get transaction total");
    test.done();
 }
+
+module.exports.testAddItemByID = function(test){
+   var transaction = new Transaction(testData);
+   test.expect(2);
+   transaction.addItemByID(testItemData.id,3);
+   test.equal(transaction.items[0].id, testItemData.id,"Failed to add item to transaction");
+   test.equal(transaction.items[0].qty, 3,"Failed to add item to transaction");
+   test.done();
+}
+
 
 tests.load(module.exports);
