@@ -1,0 +1,59 @@
+/* SUPERMARKET SELF CHECKOUT */
+
+
+/* #Color Palette
+================================================== 
+#fdfcf3 Background
+#eae8e9 Light Grey
+#00BEEF Button Hover
+*/
+
+
+/* #Resets
+================================================== */
+html,body {margin:0; padding:0;}
+
+/* #Global
+================================================== */
+body {background: #000; margin: 50 auto;}
+
+/* #Container
+================================================== */
+.container-fluid {border: 50px solid #000; padding: 20px 40px 20px 40px;}
+
+.bg-1 {background-color: #fdfcf3; color: grey;}
+
+/* #Columns
+================================================== */
+.col-sm-6 {height: 560px;}
+.col-sm-6 h1 {padding-top: 20px;}
+
+/* #Left Side
+================================================== */
+.panel {border: 3px solid grey; height: 520px;}
+.panel.panel-default {width: auto; margin-top: 20px;}
+.panel-heading-transaction {text-align: left; padding-left: 10px;}
+.panel-body {padding-top: 100px;}
+.panel-body-transaction {padding-top: 10px;}
+.panel-footer {text-align: right;}
+.panel-footer-transaction {text-align: right; padding-right: 10px;}
+
+
+/* #Right Side
+================================================== */
+/* #Buttons
+================================================== */
+
+.btn.btn-info.btn-block{height: 105px; margin-top: 50px;}
+.btn-default:hover{background: #fff; color: #00BEEF;}
+
+#staffLogin {display: inline-block; margin-top: 150px; margin-right: 40px; width: 45%;}
+#staffAlert {display: inline-block; margin-top: 150px; width: 45%;}
+
+
+
+#itemLookup {display: inline-block; margin-top: 220px; margin-right: 40px; width: 45%; height: 105px;}
+#addItem {display: inline-block; margin-top: 220px; width: 45%; height: 105px;}
+#staffLoginAdd {display: inline-block; margin-top: 150px; margin-right: 40px; width: 45%;}
+#staffAlertAdd {display: inline-block; margin-top: 150px; width: 45%;}
+
