@@ -11,78 +11,54 @@
 </head>
 <body>
 
-<!--Container-->
-<div class="container-fluid bg-1 text-center"> 		
-<div class="row">
+  <!--Container-->
+  <div class="container-fluid bg-1 text-center"> 		
+    <div class="row">
 
-<!--Left Side-->	 	
-	<div class="col-sm-6">
-		<div class="panel panel-default">
-			<div class="panel-heading-transaction"><h4>Transaction No: 000003456</h4></div>
-<div class="panel-body-transaction">          
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Qty</th>
-        <th>Product Name</th>
-        <th>Product No</th>
-        <th>Price</th>
-        <th>Per</th>
-        <th>Weight</th>
-        <th>Subtotal</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>5</td>
-        <td>Test Banana</td>
-        <td>04357890</td>
-        <td>$2.95</td>
-        <td>Kg</td>
-        <td>2Kg</td>
-        <td>$5.80</td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>Test Banana</td>
-        <td>04357890</td>
-        <td>$2.95</td>
-         <td>Kg</td>
-         <td>5Kg</td>
-         <td>$5.80</td>
-      </tr>
-      <tr>
-       	<td>5</td>
-        <td>Test Banana</td>
-        <td>04357890</td>
-        <td>$2.95</td>
-         <td>Kg</td>
-         <td>1Kg</td>
-         <td>$5.80</td>
-      </tr>
-    </tbody>
-  </table>
+      <!--Left Side-->	 	
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-body-popularProducts"> 
+            <h3>Popular Products</h3>   
+            <table class="table table-popularProducts">
+              <tbody>
+                <tr>
+                  <td><a href="../html/product.html"><img src="../assets/images/banana50px.png"><br><br>Bananas</a></td>
+                  <td><img src="../assets/images/banana50px.png"><br><br>Bananas</td>
+                  <td><img src="../assets/images/banana50px.png"><br><br>Bananas</td>
+                  <td><img src="../assets/images/banana50px.png"><br><br>Bananas</td>
+                </tr>
+              </tbody>
+            </table>    
+          </div>
 
-			</div>
-			<div class="panel-footer-transaction"><h1>Total: $32.95</h1></div>
-		</div>
-	</div> 
+          <div class="panel-body-searchAlpha"> 
+            <h3>Search Products in Alphabetical Order</h3>       
+            <a href="../html/searchResultAlpha.html"><button type="button" class="btn btn-info" class="alpha">A B C </button></a>
+            <a href="../html/searchResultAlpha.html"><button type="button" class="btn btn-info" class="alpha">D E F </button></a>
+            <a href="../html/searchResultAlpha.html"><button type="button" class="btn btn-info" class="alpha">G H I </button></a>
+            <a href="../html/searchResultAlpha.html"><button type="button" class="btn btn-info" class="alpha">J K L </button></a>
+            <a href="../html/searchResultAlpha.html"><button type="button" class="btn btn-info" class="alpha">M N O </button></a>
+            <a href="../html/searchResultAlpha.html"><button type="button" class="btn btn-info" class="alpha">P Q R </button></a>
+            <a href="../html/searchResultAlpha.html"><button type="button" class="btn btn-info" class="alpha">S T U </button></a>
+            <a href="../html/searchResultAlpha.html"><button type="button" class="btn btn-info" class="alpha">V W X</button></a>
+            <a href="../html/searchResultAlpha.html"><button type="button" class="btn btn-info" class="alpha">Y Z </button></a>
+          </div>
+        </div>
+      </div><!--end Left Side--> 
 
 
-<!--Right Side-->
-	<div class="col-sm-6">
-		<button type="button" class="btn btn-info" id="itemLookup"><h4>Lookup Item</h4></button>
-  	<button type="button" class="btn btn-info" id="addItem"><h4>Add Item</h4></button>
-  	<button type="button" class="btn btn-info" id="staffLoginAdd"><h5>Log in</h5></button> 
-		<button type="button" class="btn btn-info" id="staffAlertAdd"><h5>Call a Staff Member</h5></button> 
-  	
-	</div>
+      <!--Right Side-->
+      <div class="col-sm-6">
+        <a href="../html/lookupItem.html"><button type="button" class="btn btn-info" id="itemLookup"><h4>Lookup Item</h4></button></a>
+        <a href="../html/addItem.html"><button type="button" class="btn btn-info" id="addItem"><h4>Add Item</h4></button></a>
+        <button type="button" class="btn btn-info" id="staffLoginAdd">
+          <h5>Log in</h5></button> 
+          <button type="button" class="btn btn-info" id="staffAlertAdd">
+            <h5>Call a Staff Member</h5></button> 
+          </div><!--end Right Side-->
 
-</div> <!--end row-->
-</div> <!--end container-fluid-->
-
-</body>
-
-
-</body>
-</html>
+        </div> <!--end row-->
+      </div> <!--end container-fluid-->
+    </body>
+    </html>
