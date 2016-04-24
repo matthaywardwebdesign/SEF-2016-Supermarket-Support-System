@@ -8,7 +8,6 @@
 #00BEEF Button Hover
 */
 
-
 /* #Resets
 ================================================== */
 html,body {margin:0; padding:0;}
@@ -28,15 +27,66 @@ body {background: #000; margin: 50 auto;}
 .col-sm-6 {height: 560px;}
 .col-sm-6 h1 {padding-top: 20px;}
 
+
+
 /* #Left Side
 ================================================== */
 .panel {border: 3px solid grey; height: 520px;}
 .panel.panel-default {width: auto; margin-top: 20px;}
-.panel-heading-transaction {text-align: left; padding-left: 10px;}
+
+/* #Transaction List
+================================================== */
+.panel-heading-transaction {text-align: left; padding-left: 30px; padding-top: 30px; font-size: 0.7em;}
 .panel-body {padding-top: 100px;}
 .panel-body-transaction {padding-top: 10px;}
+.panel-body-transactionAdd {padding-left: 20px; padding-right: 20px;}
 .panel-footer {text-align: right;}
-.panel-footer-transaction {text-align: right; padding-right: 10px;}
+.panel-footer-transaction {text-align: right; padding-right: 30px;}
+
+/* #Lookup Item
+================================================== */
+.table {padding-top: 35px;}
+.table tr {height: 45px;}
+.panel-body-searchAlpha {margin-top: 35px;}
+.panel-body-searchAlpha button {margin-left: 20px; margin-right: 20px;  margin-top: 25px; height: 40px; width: 80px;}
+.panel-body-searchID {margin-top: 40px; padding-top: 10px;}
+.panel-body-searchID input {margin-bottom: 50px; width: 300px; height: 50px; text-align: center; margin-top: 20px;}
+#search {display: inline-block; height: 50px; width: 90px;}
+#select {padding-top: 100px;}
+
+
+/* #Results Page
+================================================== */
+.panel-body-ResultsAlpha {font-size: 8px; padding-top: 20px; padding-left: 20px; padding-right: 20px;}
+.table-resultsAlpha {margin-top: 50px;}
+
+/* #Product Page
+================================================== */
+.panel-body-product button {margin-left: 20px; margin-right: 20px;  margin-top: 25px; height: 40px; width: 80px;}
+#add {text-align: right;}
+.panel-body-product {margin-top: 30px;}
+.panel-body-product.table-product {height: 100px; }
+.table-product {margin-top: 40px;}
+.table-product tr {font-size: 14px;}
+
+
+/* #Weight Input Field
+================================================== */
+.panel.panel-weight input {height: 80px; width: 250px; text-align: center; margin-top: 20px;}
+
+/* #Pay Now Button - Full Panel Width
+================================================== */
+.payNow {width: 450px; height: 45px; margin-top: 60px;}
+#payNow button {width: 450px; height: 45px; margin-top: 60px;}
+
+/* #Payment Option Buttons
+================================================== */
+.panel-body-paymentOptions button {width: 200px; height: 55px; margin-left: 20px; margin-right: 20px; margin-top: 30px;}
+
+/* #Add Item
+================================================== */
+.panel-body-popularProducts {margin-top: 40px;}
+
 
 
 /* #Right Side
@@ -46,12 +96,8 @@ body {background: #000; margin: 50 auto;}
 
 .btn.btn-info.btn-block{height: 105px; margin-top: 50px;}
 .btn-default:hover{background: #fff; color: #00BEEF;}
-
 #staffLogin {display: inline-block; margin-top: 150px; margin-right: 40px; width: 45%;}
 #staffAlert {display: inline-block; margin-top: 150px; width: 45%;}
-
-
-
 #itemLookup {display: inline-block; margin-top: 220px; margin-right: 40px; width: 45%; height: 105px;}
 #addItem {display: inline-block; margin-top: 220px; width: 45%; height: 105px;}
 #staffLoginAdd {display: inline-block; margin-top: 150px; margin-right: 40px; width: 45%;}
