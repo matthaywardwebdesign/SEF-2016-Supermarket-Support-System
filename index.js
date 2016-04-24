@@ -5,6 +5,7 @@ var r = db.getLibrary();
 var error = require("./lib/error.js");
 var transactions = require("./lib/transactions.js");
 var Transaction = require("./lib/transaction.js");
+var api = require("./lib/api.js");
 
 //Connect to the database
 //note - RMIT blocks the port used by RethinkDB, run this code on the server
