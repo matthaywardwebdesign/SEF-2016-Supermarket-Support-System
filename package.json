@@ -1,0 +1,27 @@
+{
+  "name": "SEF-2016-Supermarket-Support-System",
+  "version": "1.0.0",
+  "description": "A supermarket support system developed as part of the Software Engineering Fundamentals course at RMIT",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matthaywardwebdesign/SEF-2016-Supermarket-Support-System"
+  },
+  "author": "",
+  "license": "All rights reserved",
+  "bugs": {
+    "url": "https://github.com/matthaywardwebdesign/SEF-2016-Supermarket-Support-System/issues"
+  },
+  "homepage": "https://github.com/matthaywardwebdesign/SEF-2016-Supermarket-Support-System",
+  "dependencies": {
+    "express": "^4.13.4",
+    "handlebars": "^4.0.5",
+    "rethinkdb": "^2.2.3"
+  }
+}
