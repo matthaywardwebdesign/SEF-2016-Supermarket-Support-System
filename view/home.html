@@ -12,7 +12,15 @@
 <!--Right Side-->
 <div class="col-sm-6">
    <div class="page-header"><h1><b>SUPERMARKET</b></h1> <h2>SELF CHECKOUT</h2></div>
-   <a href="../html/selectOption.html"><button type="button" class="btn btn-info btn-block"><h4>Start</h4></button></a>
+   <a onclick='onClickStart()'><button type="button" class="btn btn-info btn-block"><h4>Start</h4></button></a>
    <button type="button" class="btn btn-info" id="staffLogin"><h5>Log in</h5></button>
    <button type="button" class="btn btn-info" id="staffAlert"><h5>Call a Staff Member</h5></button>
 </div><!--end Right Side-->
+<script>
+function onClickStart(){
+   Supermarket.createTransaction(function (id){
+      Cookies.set('currentTransaction', id);
+      window.location.href = "/items";
+   });
+}
+</script>

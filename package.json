@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/matthaywardwebdesign/SEF-2016-Supermarket-Support-System",
   "dependencies": {
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
     "handlebars": "^4.0.5",
     "rethinkdb": "^2.2.3"
