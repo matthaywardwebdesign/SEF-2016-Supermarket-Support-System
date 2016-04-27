@@ -33,8 +33,10 @@
 
           <div class="panel-body-searchID"> 
             <h3>Search Products by ID</h3>       
-            <input textarea="text" id="enterProdId" placeholder="Enter Product ID"></input>
-            <a href="../html/product.html"><button type="button" class="btn btn-info" id="search">Search</button></a> 
+            <form action="product.html" method="GET">
+            	<input type="textarea" id="enterProdId" value="Enter Product ID" name="ID"></input>
+            	<a href="../html/product.html"><button type="submit" class="btn btn-info" id="search" value="submit">Search</button></a>
+            </form> 
           </div>
         </div>
       </div><!--end Left Side--> 
