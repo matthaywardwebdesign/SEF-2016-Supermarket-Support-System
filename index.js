@@ -28,5 +28,7 @@ db.connect(function(err){
          });
          console.log("Total price for this transaction: " + total);
       })
+   } else {
+      console.log(err);
    }
 });
