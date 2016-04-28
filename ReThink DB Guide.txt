@@ -1,0 +1,19 @@
+Running Local ReThink DB Mac (Also Linux Maybe):
+
+1] Open your favorit terminal program.
+
+2] Install ReThink DB by running the command "npm install rethinkdb" (without quotes)
+
+3] Run ReThink DB by running the command "rethinkdb" (without quotes)
+
+4] Rethink DB should now be running on port 8080. browse to this in your browser "localhost:8080" (without quotes)
+
+5] Create tables as needed in a database called supermarket (Note the default DB is Test)
+	Create "items" & "transactions" tables 
+
+6] Fill with data
+ 	you can do this by running a command like this directy to the web ui (http://localhost:8080/#dataexplorer)
+ 	
+ 	r.db('supermarket').table('items').insert({"id":1,"name":"Test Banana","isWeighted": true,"price":2.90,"ean":4011,"soh":0})
+
+ 	you can then test to check what data is in the DB r.db('supermarket').table('items')
