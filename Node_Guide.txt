@@ -1,0 +1,18 @@
+Running Local Node website Mac & Linus(Also Windows Maybe):
+
+Notes : You will need to change config.json to read "localhost" (WITH quotes) for the host variable
+
+1] Open your favorite terminal program. Or the Node console in windows.
+
+2] navigate to the working directory E.G. "cd Projects/SEF-2016-Supermarket..."  
+
+3] Update/Install Node & other librarys by running the command "npm install" (without quotes) in the project working directory.
+
+4] if everything went well node is now installed you can now start the server with the command "node index.js" (without quotes)(run from the root of the working directory)
+
+5] the page is now running on port 3000 type "localhost:3000" (without quotes) into your browser to load the page.
+
+6] You should now have two terminals open one running RethinkDB and the other running node.js
+
+
+
