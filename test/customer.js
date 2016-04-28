@@ -18,14 +18,14 @@ tests.before = function(done){
 }
 
 tests.beforeEach = function(done){
-   var Customer = new Customer(testData);
-   Customers.saveCustomer(Customer, function(){
+   var c = new Customer(testData);
+   customers.saveCustomer(c, function(){
          done();
       });
    };
 
 tests.after = function(done){
-   Customers.deleteCustomerByID(testData.id, function(){
+   customers.deleteCustomerByID(testData.id, function(){
       var conn = db.getConnection();
       conn.close();
       done();
@@ -37,50 +37,50 @@ tests.afterEach = function(done){
 }
 
 module.exports.testGetID = function(test){
-   var Customer = new Customer(testData);
+   var customer = new Customer(testData);
    test.expect(1);
-   test.equal(Customer.getID(), testData.id, "Failed to get Customer ID");
+   test.equal(customer.getID(), testData.id, "Failed to get Customer ID");
    test.done();
 }
 
 module.exports.testGetFirstName = function(test){
-   var Customer = new Customer(testData);
+   var customer = new Customer(testData);
    test.expect(1);
-   test.equal(Customer.getFirstName(), testData.firstName, "Failed to get first name of Customer");
+   test.equal(customer.getFirstName(), testData.firstName, "Failed to get first name of Customer");
    test.done();
 }
 
 module.exports.testGetLastName = function(test){
-   var Customer = new Customer(testData);
+   var customer = new Customer(testData);
    test.expect(1);
-   test.equal(Customer.getLastName(), testData.lastName, "Failed to get last name of Customer");
+   test.equal(customer.getLastName(), testData.lastName, "Failed to get last name of Customer");
    test.done();
 }
 
 
 module.exports.testSetLastName = function(test){
-   var Customer = new Customer(testData);
-   Customer.setLastName("Doe");
+   var customer = new Customer(testData);
+   customer.setLastName("Doe");
    test.expect(1);
-   test.equal(Customer.getLastName(), "Doe", "Failed to set Customer last name");
+   test.equal(customer.getLastName(), "Doe", "Failed to set Customer last name");
    test.done();
 }
 
 module.exports.testSetFirstName = function(test){
-   var Customer = new Customer(testData);
-   Customer.setFirstName("Jack");
+   var customer = new Customer(testData);
+   customer.setFirstName("Jack");
    test.expect(1);
-   test.equal(Customer.getFirstName(), "Jack", "Failed to set Customer price");
+   test.equal(customer.getFirstName(), "Jack", "Failed to set Customer price");
    test.done();
 }
 
 module.exports.testGetCustomerByID = function(test){
    test.expect(3);
-   Customers.getCustomerByID(testData.id, function (err, Customer){
+   customers.getCustomerByID(testData.id, function (err, customer){
       test.equal(err, null, "Failed to retrieve a Customer - " + err);
-      test.notEqual(Customer,null,"Failed to retrieve a Customer");
-      if (Customer != null){
-         test.equal(Customer.getID(), testData.id, "Failed to retrieve a Customer from ID");
+      test.notEqual(customer,null,"Failed to retrieve a Customer");
+      if (customer != null){
+         test.equal(customer.getID(), testData.id, "Failed to retrieve a Customer from ID");
       }
       test.done();
    });
@@ -88,11 +88,11 @@ module.exports.testGetCustomerByID = function(test){
 
 module.exports.testGetCustomerByFirstName = function(test){
    test.expect(3);
-   Customers.getCustomerByFirstName(testData.firstName, function (err, Customer){
+   customers.getCustomerByFirstName(testData.firstName, function (err, customers){
       test.equal(err, null, "Failed to retrieve a Customer - " + err);
-      test.notEqual(Customer,null,"Failed to retrieve a Customer");
-      if (Customer != null){
-         test.equal(Customer.getFirstName(), testData.firstName, "Failed to retrieve a Customer from first name");
+      test.notEqual(customers,null,"Failed to retrieve a Customer");
+      if (customers != null){
+         test.equal(customers[0].getFirstName(), testData.firstName, "Failed to retrieve a Customer from first name");
       }
       test.done();
    });
@@ -100,11 +100,11 @@ module.exports.testGetCustomerByFirstName = function(test){
 
 module.exports.testGetCustomerByLastName = function(test){
    test.expect(3);
-   Customers.getCustomerByLastName(testData.lastName, function (err, Customer){
+   customers.getCustomerByLastName(testData.lastName, function (err, customers){
       test.equal(err, null, "Failed to retrieve a Customer - " + err);
-      test.notEqual(Customer,null,"Failed to retrieve a Customer");
-      if (Customer != null){
-         test.equal(Customer.getLastName(), testData.lastName, "Failed to retrieve an Customer from last name");
+      test.notEqual(customers,null,"Failed to retrieve a Customer");
+      if (customers != null){
+         test.equal(customers[0].getLastName(), testData.lastName, "Failed to retrieve an Customer from last name");
       }
       test.done();
    });
@@ -112,17 +112,17 @@ module.exports.testGetCustomerByLastName = function(test){
 
 module.exports.testDeleteCustomerByID = function(test){
    test.expect(1);
-   Customers.deleteCustomerByID(testData.id, function (err, Customer){
-      test.equal(Customer,null,"Failed to delete a Customer");
+   customers.deleteCustomerByID(testData.id, function (err){
+      test.equal(err,null,"Failed to delete a Customer");
       test.done();
    });
 }
 
 module.exports.testDeleteCustomer = function(test){
    test.expect(1);
-   var Customer = new Customer(testData);
-   Customers.deleteCustomer(Customer, function (err, Customer){
-      test.equal(Customer,null,"Failed to delete an Customer");
+   var customer = new Customer(testData);
+   customers.deleteCustomer(customer, function (err){
+      test.equal(err,null,"Failed to delete an Customer");
       test.done();
    });
 }
