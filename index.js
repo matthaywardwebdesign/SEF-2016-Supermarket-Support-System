@@ -18,16 +18,10 @@ var api = require("./lib/api.js");
 
 db.connect(function(err){
    if (!err){
-      var t = new Transaction({"id":1, "customerNo": 1, "date": new Date()});
+      var t = new Transaction({"id":12, "customerNo": 1, "date": new Date()});
       t.addItemByID(133211, 2.5);
       t.addItemByID(12345, 2);
-      t.getItems(function(result){
-         var total = 0.0;
-         result.forEach(function(data){
-            total+= (data.item.price * data.qty);
-         });
-         console.log("Total price for this transaction: " + total);
-      })
+      transactions.saveTransaction(t, function (err){console.log(err)});
    } else {
       console.log(err);
    }

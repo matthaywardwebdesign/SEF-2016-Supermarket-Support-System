@@ -1,0 +1,40 @@
+<div class="panel panel-default transaction-holder">
+   <div class="panel-heading-transaction">
+      <p>Transaction No: {{transaction.id}}</br>Date: {{transaction.date}}</p>
+   </div>
+   <div class="panel-body-transactionAdd">
+      <table class="table table-hover">
+         <thead>
+            <tr>
+               <th>Qty</th>
+               <th>Product Name</th>
+               <th>Product No</th>
+               <th>Price</th>
+               <th>Per</th>
+               <th>Subtotal</th>
+            </tr>
+         </thead>
+         <tbody>
+            {{#each transaction.items}}
+            <tr>
+               <td>{{qty}}</td>
+               <td>{{item.name}}</td>
+               <td>{{item.id}}</td>
+               <td>{{item.price}}</td>
+               <td>Ea</td>
+               <td>$0.00</td>
+            </tr>
+            {{/each}}
+         </tbody>
+      </table>
+   </div>
+   <div class="panel-footer-transaction">
+      <h1>Total: ${{transaction.total}}</h1>
+   </div>
+   <br>
+   <div id="payNow">
+      <a href="../html/paymentOptions.html">
+         <button type="button" class="btn btn-info" class="payNow">Pay Now</button>
+      </a>
+   </div>
+</div>

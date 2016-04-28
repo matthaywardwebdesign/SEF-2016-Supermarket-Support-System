@@ -1,0 +1,27 @@
+</div> <!--end container-fluid-->
+<script>
+function onClickNew(){
+   Supermarket.createTransaction(function (id){
+      Cookies.set('currentTransaction', id);
+      window.location.href = "/items";
+   });
+}
+
+function onClickAddItem(id, weighted){
+   Cookies.set("currentItem",id);
+   if (weighted){
+      //Supermarket.loadPanel("weight-selector");
+      Supermarket.loadPanel("each-selector");
+   } else {
+      Supermarket.loadPanel("each-selector");
+   }
+}
+
+function onClickAddQuantity(id, quantity){
+   Supermarket.addItem(id,quantity,function(){
+      Supermarket.loadPanel("transaction-details");
+   });
+}
+</script>
+</body>
+</html>

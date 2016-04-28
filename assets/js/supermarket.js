@@ -5,4 +5,14 @@ var Supermarket = {};
          callback(data.id);
       });
    }
+
+   Supermarket.addItem = function(id, quantity, callback){
+      API.post("transaction/" + Cookies.get("currentTransaction") + "/items", {id: id, qty: quantity}, function(){
+         callback();
+      });
+   }
+
+   Supermarket.loadPanel = function(panel){
+      $("#panel-holder").load("/panel/" + panel);
+   }
 })();

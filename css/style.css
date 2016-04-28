@@ -1,0 +1,21 @@
+.panel-default {
+   padding:20px;
+}
+
+.btn-large {
+   font-size:24px;
+}
+
+.item-add-table td {
+   line-height: 50px!important;
+}
+
+.input-large {
+   font-size:24px!important;
+   padding:20px!important;
+}
+
+.transaction-holder {
+   height:500px;
+   overflow:scroll;
+}
