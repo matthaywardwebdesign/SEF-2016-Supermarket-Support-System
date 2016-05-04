@@ -20,16 +20,20 @@
                <td>{{qty}}</td>
                <td>{{item.name}}</td>
                <td>{{item.id}}</td>
-               <td>{{item.price}}</td>
+               <td>{{formatDecimal item.price}}</td>
                <td>Ea</td>
-               <td>$0.00</td>
+               <td>{{formatDecimal lineTotal}}</td>
             </tr>
             {{/each}}
          </tbody>
       </table>
    </div>
    <div class="panel-footer-transaction">
-      <h1>Total: ${{transaction.total}}</h1>
+      <h1>Total: ${{formatDecimal transaction.total}}</h1>
+      <br>
+      <b>Includes GST: </b>${{formatDecimal transaction.gst}}
+      <br>
+      <b>GST Applicable Amount: </b>${{formatDecimal transaction.gstApplicableTotal}}
    </div>
    <br>
    <div id="payNow">

@@ -6,14 +6,10 @@ module.exports.run = function(req, res, template){
    var transactionID = parseInt(req.cookies.currentTransaction);
    transactions.getTransactionByID(transactionID, function (err, transaction){
       if (err){res.end(err);return;}
-      data.transaction = transaction;
-      transaction.getItems(function (items){
-         if (err){res.end(err);return;}
-         transaction.calculateTotal(function (total){
-            data.transaction.items = items;
-            data.transaction.total = total.toFixed(2);
+         transaction.calculate(function (){
+            console.log(transaction);
+            data.transaction = transaction;
             res.end(template(data));
          });
-      });
    });
 }
