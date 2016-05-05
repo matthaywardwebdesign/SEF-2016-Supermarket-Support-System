@@ -1,0 +1,52 @@
+<div class='panel panel-default'>
+   <h3>Item Management</h3>
+   <br>
+   <table class="table table-hover">
+      <thead>
+         <tr>
+            <th>Product Name</th>
+            <th>Product No</th>
+            <th>Price</th>
+            <th>Unit</th>
+            <th>SOH</th>
+            <th>Edit</th>
+         </tr>
+      </thead>
+      <tbody>
+         {{#each items}}
+         <tr>
+            <td>{{name}}</td>
+            <td>{{id}}</td>
+            <td>{{formatDecimal price}}</td>
+            <td>{{unit}}</td>
+            <td>{{soh}}</td>
+            <td>
+               <a href='#'>Edit</a>
+            </td>
+         </tr>
+         {{/each}}
+      </tbody>
+   </table>
+   <br><br>
+   <hr>
+   <div class='row'>
+      <div class='col-sm-4'>
+         {{#if showBackButton}}
+         <button onclick='loadPageOfItems({{pageAmount}}, {{backOffset}})' class='btn btn-primary'>Back</button>
+         {{/if}}
+      </div>
+      <div class='col-sm-4 text-center' style='line-height:40px;'>
+         Page {{pageNumber}}
+      </div>
+      <div class='col-sm-4 text-right'>
+         {{#if showNextButton}}
+         <button onclick='loadPageOfItems({{pageAmount}}, {{nextOffset}})' class='btn btn-primary'>Next</button>
+         {{/if}}
+      </div>
+   </div>
+</div>
+<script>
+   function loadPageOfItems(amount, offset){
+      Supermarket.loadPanel("item-management?amount=" + amount + "&offset=" + offset);
+   }
+</script>

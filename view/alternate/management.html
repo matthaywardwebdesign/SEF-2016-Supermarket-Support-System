@@ -1,0 +1,22 @@
+<ul class="nav nav-tabs">
+  <li class='active'><a id='tab-item-management' onclick='loadTab("item-management")'>Items</a></li>
+  <li><a id='tab-transaction-management' onclick='loadTab("transaction-management")'>Transactions</a></li>
+  <li><a id='tab-sales-management' onclick='loadTab("sales-management")'>Sales</a></li>
+</ul>
+<br>
+<div class='row'>
+   <div class='col-sm-12'>
+      <div id='panel-holder'>
+
+      </div>
+   </div>
+</div>
+<script>
+function loadTab(tab){
+   Supermarket.loadPanel(tab);
+   $(".nav-tabs li").removeClass("active");
+   tab = tab.split("?")[0];
+   $("#tab-" + tab).parent().addClass("active");
+}
+Supermarket.loadPanel("item-management");
+</script>

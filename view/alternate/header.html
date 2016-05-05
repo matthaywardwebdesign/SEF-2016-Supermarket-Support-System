@@ -22,7 +22,11 @@
          <h4>Supermarket Support System</h4>
       </div>
       <div class='col-sm-6'>
+         {{#if inATransaction}}
+            <a href='/items'><button class='btn btn-primary'>Current Transaction</button></a>
+         {{/if}}
          <button class='btn btn-primary' onclick='onClickNew()'>New Transaction</button>
+         <a href='/management'><button class='btn btn-primary'>Management</button></a>
       </div>
    </div>
    <div class='row'>
