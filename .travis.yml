@@ -1,10 +1,10 @@
 language: node_js
 node_js:
   - 0.12
+before_install:
+  - sudo apt-get install -y sshpass
 addons:
-   apt:
-      packages:
-         - sshpass
+  ssh_known_hosts: sef.rmit.matthayward.com.au
 notifications:
   slack: sef2016:5pCXyjYnlmgDF0uKs5Hii0P3
 after_success:
