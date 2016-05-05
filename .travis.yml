@@ -1,5 +1,12 @@
 language: node_js
 node_js:
   - 0.12
+addons:
+   apt:
+      packages:
+         - sshpass
 notifications:
   slack: sef2016:5pCXyjYnlmgDF0uKs5Hii0P3
+after_success:
+   - export SSHPASS=rmit-sef
+   - sshpass -e ssh travisci@sef.rmit.matthayward.com.au /home/travisci/supermarket/autodeploy.sh
