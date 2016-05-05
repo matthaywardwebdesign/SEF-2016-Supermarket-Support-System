@@ -24,7 +24,18 @@ var testItemData = {
    "isWeighted": true,
    "price":2.90,
    "ean":4011,
-   "soh":0
+   "soh":0,
+   "gstApplicable":false
+}
+
+var testItem2Data = {
+   "id":2,
+   "name":"Test Cocopops",
+   "isWeighted": false,
+   "price":6.50,
+   "ean":9300123456789,
+   "soh":0,
+   "gstApplicable":true
 }
 
 tests.before = function(done){
@@ -36,8 +47,9 @@ tests.before = function(done){
 tests.beforeEach = function(done){
    var transaction = new Transaction(testData);
    var item = new Item(testItemData);
+   var item2 = new Item(testItem2Data);
    transactions.saveTransaction(transaction, function(){
-      items.saveItem(item, function(){
+      items.saveItem([item, item2], function(){
          done();
       });
    });
@@ -119,6 +131,34 @@ module.exports.testAddItemByID = function(test){
    test.equal(transaction.items[0].id, testItemData.id,"Failed to add item to transaction");
    test.equal(transaction.items[0].qty, 3,"Failed to add item to transaction");
    test.done();
+}
+
+module.exports.testGetItems = function(test){
+   var transaction = new Transaction(testData);
+   test.expect(5);
+   transaction.addItemByID(testItemData.id, 2);
+   transaction.getItems(function(items){
+      test.ok(items.length > 0, "Failed to retreive transaction items");
+      test.equal(items[0].item.id, testItemData.id, "Failed to retrive transaction items");
+      test.equal(items[0].item.price, testItemData.price, "Failed to retreive transaction items");
+      test.equal(items[0].qty, 2, "Failed to retrieve transaction items");
+      test.ok(items[0].lineTotal >= 0, "Failed to retrieve transaction items");
+      test.done();
+   });
+}
+
+module.exports.testCalculate = function(test){
+   var transaction = new Transaction(testData);
+   transaction.addItemByID(testItemData.id, 2.5);
+   transaction.addItemByID(testItem2Data.id, 4);
+   test.expect(4);
+   transaction.calculate(function(){
+      test.equal(transaction.getTotal(), testItemData.price * 2.5 + testItem2Data.price * 4, "Failed to calculate transaction total correctly");
+      test.equal(transaction.getGST(), testItem2Data.price * 4 * 0.10, "Failed to calculate GST correctly");
+      test.equal(transaction.getNoTransactionItems(), 2, "Failed to correctly calculate number of transaction items");
+      test.equal(transaction.getGSTApplicableTotal(), testItem2Data.price * 4, "Failed to correctly calculate GST Applicable total");
+      test.done();
+   });
 }
 
 

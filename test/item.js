@@ -11,7 +11,8 @@ var testData = {
    "isWeighted": true,
    "price":2.90,
    "ean":4011,
-   "soh":0
+   "soh":0,
+   "gstApplicable": true
 }
 
 tests.before = function(done){
@@ -128,6 +129,21 @@ module.exports.testRemoveStock = function(test){
    item.removeStock(45);
    test.equal(item.getSOH(), 5, "Failed to remove stock from an item");
    test.equal(item.removeStock(20), error.ERROR_NEGATIVE_SOH, "Failed to return error for attempting to make SOH negative");
+   test.done();
+}
+
+module.exports.testIsGSTApplicable = function(test){
+   var item = new Item(testData);
+   test.expect(1);
+   test.equal(item.isGSTApplicable(), true, "Failed to return correct value for isGSTApplicable");
+   test.done();
+}
+
+module.exports.testSetGSTApplicable = function(test){
+   var item = new Item(testData);
+   test.expect(1);
+   item.setGSTApplicable(false);
+   test.equal(item.isGSTApplicable(), false, "Failed to set correct GST applicable value");
    test.done();
 }
 
