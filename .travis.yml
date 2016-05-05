@@ -1,3 +1,5 @@
 language: node_js
 node_js:
   - 0.12
+notifications:
+  slack: sef2016:5pCXyjYnlmgDF0uKs5Hii0P3
