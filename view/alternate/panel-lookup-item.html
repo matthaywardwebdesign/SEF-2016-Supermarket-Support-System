@@ -2,10 +2,17 @@
    <button class='btn btn-primary btn-large' onclick='Supermarket.loadPanel("transaction-details")'>Back</button>
    <hr>
    <div style='text-align:left;'>
-      <h4>Lookup Item</h4>
+      <h4>Lookup Item by: </h4><br>
+      <div class="text-center">
+         <button class='btn btn-primary btn-large' onclick="filterLookup('id')">ID</button>
+         <button class='btn btn-primary btn-large'onclick="filterLookup('ean')">EAN</button>
+         <button class='btn btn-primary btn-large'onclick="filterLookup('name')">Name</button>
+         <br>
+      </div>
       <hr>
-      <input class='form-control input-large' id='item-qty' type='number' min="0" value="0"/>
+      <input class='form-control input-large' id='item-search' type='number' min="0" value="0"/>
       <br>
+      <button type="submit" class='btn btn-primary btn-large'>Submit</button>
       <hr>
       <table class="table table-hover item-add-table">
          <thead>
@@ -33,3 +40,9 @@
       </table>
    </div>
 </div>
+<script>
+function filterLookup(type){
+   var search = $("#item-search").val();
+   Supermarket.loadPanel("lookup-item?type=" + type + "&search=" + search);
+}
+</script>
