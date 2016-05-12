@@ -4,7 +4,7 @@ var item = require("../lib/item.js");
 module.exports.run = function(req, res, template){
    var data = {};
    var offset = 0;
-   var amount = 10;
+   var amount = 8;
 
    if (req.query.offset != null && req.query.offset != undefined){
       offset = parseInt(req.query.offset);
@@ -20,6 +20,7 @@ module.exports.run = function(req, res, template){
 
    data.pageNumber = (offset / amount) + 1;
    data.pageAmount = amount;
+   data.offset = offset;
    data.nextOffset = offset + amount;
    data.backOffset = offset - amount;
    if (data.backOffset < 0){

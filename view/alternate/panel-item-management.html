@@ -21,7 +21,7 @@
             <td>{{unit}}</td>
             <td>{{soh}}</td>
             <td>
-               <a href='#'>Edit</a>
+               <a href='#' onclick='Supermarket.loadPanel("item/{{id}}/edit?pageAmount={{../pageAmount}}&pageOffset={{../offset}}")'>Edit</a>
             </td>
          </tr>
          {{/each}}
@@ -49,4 +49,5 @@
    function loadPageOfItems(amount, offset){
       Supermarket.loadPanel("item-management?amount=" + amount + "&offset=" + offset);
    }
+
 </script>

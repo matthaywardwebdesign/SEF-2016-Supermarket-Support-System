@@ -1,0 +1,71 @@
+<button class='btn btn-primary' onclick='loadPageOfItems({{pageAmount}},{{pageOffset}})'>Back</button>
+<br><br>
+<div class='row'>
+   <div class='col-sm-9'>
+      <h4>Edit Item - {{item.name}}</h4>
+      <b>Item ID: {{item.id}}</b>
+      <br><br>
+      <div id='form-holder'>
+
+      </div>
+      <br><hr><br>
+      <img id="barcode"/>
+   </div>
+   <div class='col-sm-3'>
+      <h5><b>Item Actions</b></h5>
+      <br><br>
+      <button class='btn btn-success' onclick='onClickSave()'>Save Item</button>
+      <br><br>
+      <button class='btn btn-danger' onclick='onClickDelete()'>Delete Item</button>
+   </div>
+</div>
+<script>
+var item = {
+   name: "{{item.name}}",
+   price: "{{formatDecimal item.price}}",
+   ean:"{{item.ean}}",
+   weighted: {{item.isWeighted}},
+   gstApplicable: {{item.gstApplicable}}
+};
+var form = [
+   {"id":"name", "name":"Name", "type":"text"},
+   {"id":"price", "name":"Price", "type":"number"},
+   {"id":"ean", "name": "EAN (Barcode)", "type": "number"},
+   {"id":"weighted", "name": "Is Weighted", "type":"checkbox"},
+   {"id":"gstApplicable", "name": "Is GST Applicable", "type":"checkbox"}
+];
+Supermarket.createForm("#form-holder", "item-form",form,item);
+generateBarcode();
+
+$("#ean").keyup(function(){
+   generateBarcode();
+});
+
+function generateBarcode(){
+   if ($("#ean").val().length == 13){
+      $("#barcode").JsBarcode($("#ean").val(), {format: "ean13"});
+   } else {
+      $("#barcode").JsBarcode($("#ean").val());
+   }
+}
+
+function onClickSave(){
+   var data = {};
+   data.id = {{item.id}};
+   data.name = $("#name").val();
+   data.price = parseFloat($("#price").val());
+   data.ean = parseInt($("#ean").val());
+   data.isWeighted = $("#weighted").is(":checked");
+   data.gstApplicable = $("#gstApplicable").is(":checked");
+   console.log(data);
+   API.post("item/{{item.id}}/edit", data, function(){
+      loadPageOfItems({{pageAmount}},{{pageOffset}});
+   });
+}
+
+function onClickDelete(){
+   API.post("item/{{item.id}}/delete", {}, function(){
+      loadPageOfItems({{pageAmount}},{{pageOffset}});
+   });
+}
+</script>

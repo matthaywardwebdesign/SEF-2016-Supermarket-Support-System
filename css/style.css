@@ -19,3 +19,25 @@
    height:500px;
    overflow:scroll;
 }
+
+input[type=checkbox] {
+    display: inline-block;
+    box-shadow: none;
+    width:30px;
+    height:30px;
+    position: relative;
+    top:10px;
+    margin-left:20px;
+    -webkit-appearance:none;
+}
+
+input:checked {
+   background:#337ab7;
+   outline: none;
+   border:none;
+}
+
+input:focus {
+    outline: none!important;
+    box-shadow: none!important;
+}

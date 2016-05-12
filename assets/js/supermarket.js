@@ -17,4 +17,25 @@ var Supermarket = {};
       $("#panel-holder").load("/panel/" + panel);
    }
 
+   Supermarket.createForm = function(selector, id, fields, data){
+      var form = "<div id='form-" + id + "'>";
+      for (var i = 0; i < fields.length; i++){
+         var type = fields[i].type;
+         var name = fields[i].name;
+         var id = fields[i].id;
+         var value = data[id] || "";
+         if (type == "checkbox"){
+            var checked = "";
+            if (value == true){
+               checked = "checked";
+            }
+            form = form + "<b>" + name + "</b><input class='form-control' type='" + type + "' name='" + name + "' id='" + id + "' " + checked + " /><br>";
+         } else {
+            form = form + "<b>" + name + "</b><br><br><input class='form-control' type='" + type + "' name='" + name + "' id='" + id + "' value='" + value + "' /><br>";
+         }
+      }
+      form = form + "</div>";
+      $(selector).append(form);
+   }
+
 })();
