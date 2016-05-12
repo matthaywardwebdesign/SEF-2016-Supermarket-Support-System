@@ -6,5 +6,6 @@ module.exports.run = function(req, res, template){
    data.pageOffset = req.query.pageOffset;
    data.pageAmount = req.query.pageAmount;
    data.search = req.query.search;
+   data.sort = req.query.sort;
    res.end(template(data));
 }

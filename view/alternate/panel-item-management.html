@@ -12,14 +12,14 @@
    </div>
 
    <br><br>
-   <table class="table table-hover">
+   <table class="table table-hover management-items-table">
       <thead>
          <tr>
-            <th>Product Name</th>
-            <th>Product No</th>
-            <th>Price</th>
+            <th onclick='sortItemsBy("name")' id='sort-name'>Product Name</th>
+            <th onclick='sortItemsBy("id")' id='sort-id'>Product No</th>
+            <th onclick='sortItemsBy("price")' id='sort-price'>Price</th>
             <th>Unit</th>
-            <th>SOH</th>
+            <th onclick='sortItemsBy("soh")' id='sort-soh'>SOH</th>
             <th>Edit</th>
          </tr>
       </thead>
@@ -32,7 +32,7 @@
             <td>{{unit}}</td>
             <td>{{soh}}</td>
             <td>
-               <a href='#' onclick='Supermarket.loadPanel("item/{{id}}/edit?search={{../search}}&pageAmount={{../pageAmount}}&pageOffset={{../offset}}")'>Edit</a>
+               <a href='#' onclick='Supermarket.loadPanel("item/{{id}}/edit?search={{../search}}&pageAmount={{../pageAmount}}&pageOffset={{../offset}}&sort={{../sort}}")'>Edit</a>
             </td>
          </tr>
          {{/each}}
@@ -43,7 +43,7 @@
    <div class='row'>
       <div class='col-sm-4'>
          {{#if showBackButton}}
-         <button onclick='loadPageOfItems("{{search}}",{{pageAmount}}, {{backOffset}})' class='btn btn-primary'>Back</button>
+         <button onclick='loadPageOfItems("{{search}}",{{pageAmount}}, {{backOffset}}, "{{sort}}")' class='btn btn-primary'>Back</button>
          {{/if}}
       </div>
       <div class='col-sm-4 text-center' style='line-height:40px;'>
@@ -51,22 +51,28 @@
       </div>
       <div class='col-sm-4 text-right'>
          {{#if showNextButton}}
-         <button onclick='loadPageOfItems("{{search}}",{{pageAmount}}, {{nextOffset}})' class='btn btn-primary'>Next</button>
+         <button onclick='loadPageOfItems("{{search}}",{{pageAmount}}, {{nextOffset}}, "{{sort}}")' class='btn btn-primary'>Next</button>
          {{/if}}
       </div>
    </div>
 </div>
 <script>
-   function loadPageOfItems(search, amount, offset){
+   function loadPageOfItems(search, amount, offset, sort){
       if (search != null && search != ""){
-         Supermarket.loadPanel("item-management?search=" + search + "&amount=" + amount + "&offset=" + offset);
+         Supermarket.loadPanel("item-management?search=" + search + "&amount=" + amount + "&offset=" + offset + "&sort=" + sort);
       } else {
-         Supermarket.loadPanel("item-management?amount=" + amount + "&offset=" + offset);
+         Supermarket.loadPanel("item-management?amount=" + amount + "&offset=" + offset + "&sort=" + sort);
       }
+   }
+
+   function sortItemsBy(sort){
+      loadPageOfItems("{{search}}",{{pageAmount}},{{offset}},sort);
    }
 
    function onClickSearch(){
       var term = $("#search").val();
       Supermarket.loadPanel("item-management?search=" + term + "&amount={{pageAmount}}&offset=0");
    }
+
+   $("#sort-{{sort}}").css("text-decoration","underline");
 </script>

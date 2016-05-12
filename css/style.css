@@ -46,3 +46,11 @@ input:focus {
    display: inline-block;
    width:300px;
 }
+
+.management-items-table th {
+   cursor: pointer;
+}
+
+.management-items-table th:hover {
+   text-decoration: underline;
+}

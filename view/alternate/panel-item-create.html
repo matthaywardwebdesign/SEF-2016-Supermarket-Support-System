@@ -1,4 +1,4 @@
-<button class='btn btn-primary' onclick='loadPageOfItems("{{search}}",{{pageAmount}},{{pageOffset}})'>Back</button>
+<button class='btn btn-primary' onclick='loadPageOfItems("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}")'>Back</button>
 <br><br>
 <div class='row'>
    <div class='col-sm-9'>
@@ -63,13 +63,13 @@ function onClickSave(){
    data.gstApplicable = $("#gstApplicable").is(":checked");
    console.log(data);
    API.post("item/" + data.id + "/edit", data, function(){
-      loadPageOfItems({{pageAmount}},{{pageOffset}});
+      loadPageOfItems("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
    });
 }
 
 function onClickDelete(){
    API.post("item/{{item.id}}/delete", {}, function(){
-      loadPageOfItems({{pageAmount}},{{pageOffset}});
+      loadPageOfItems("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
    });
 }
 </script>
