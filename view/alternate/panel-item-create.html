@@ -22,6 +22,7 @@ var item = {
    name: "",
    price: "0.00",
    ean:"",
+   soh:"",
    weighted: false,
    gstApplicable: false
 };
@@ -30,6 +31,7 @@ var form = [
    {"id":"name", "name":"Name", "type":"text"},
    {"id":"price", "name":"Price", "type":"number"},
    {"id":"ean", "name": "EAN (Barcode)", "type": "number"},
+   {"id":"soh", "name": "Stock on Hand", "type": "number"},
    {"id":"weighted", "name": "Is Weighted", "type":"checkbox"},
    {"id":"gstApplicable", "name": "Is GST Applicable", "type":"checkbox"}
 ];
@@ -56,6 +58,7 @@ function onClickSave(){
    data.name = $("#name").val();
    data.price = parseFloat($("#price").val());
    data.ean = parseInt($("#ean").val());
+   data.soh = parseInt($("#soh").val());
    data.isWeighted = $("#weighted").is(":checked");
    data.gstApplicable = $("#gstApplicable").is(":checked");
    console.log(data);
