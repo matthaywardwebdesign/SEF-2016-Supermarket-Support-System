@@ -41,3 +41,8 @@ input:focus {
     outline: none!important;
     box-shadow: none!important;
 }
+
+#search {
+   display: inline-block;
+   width:300px;
+}

@@ -5,6 +5,7 @@ module.exports.run = function(req, res, template){
    var data = {};
    var offset = 0;
    var amount = 8;
+   var search = req.query.search || "";
 
    if (req.query.offset != null && req.query.offset != undefined){
       offset = parseInt(req.query.offset);
@@ -27,11 +28,22 @@ module.exports.run = function(req, res, template){
       data.backOffset = 0;
    }
 
-   items.getPageOfItems(amount, offset, function (err, items){
-      data.items = items;
-      if (items.length == amount){
-         data.showNextButton = true;
-      }
-      res.end(template(data));
-   });
+   if (search == ""){
+      items.getPageOfItems(amount, offset, function (err, items){
+         data.items = items;
+         if (items.length == amount){
+            data.showNextButton = true;
+         }
+         res.end(template(data));
+      });
+   } else {
+      data.search = search;
+      items.getPageOfSearchItems(search, amount, offset, function (err, items){
+         data.items = items;
+         if (items.length == amount){
+            data.showNextButton = true;
+         }
+         res.end(template(data));
+      });
+   }
 }

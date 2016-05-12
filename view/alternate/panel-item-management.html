@@ -1,7 +1,16 @@
 <div class='panel panel-default'>
    <h3>Item Management</h3>
    <br>
-   <button class='btn btn-primary' onclick='Supermarket.loadPanel("item-create?pageAmount={{pageAmount}}&pageOffset={{offset}}")'>Create Item</button>
+   <div class='row'>
+      <div class='col-sm-6'>
+         <button class='btn btn-primary' onclick='Supermarket.loadPanel("item-create?pageAmount={{pageAmount}}&pageOffset={{offset}}")'>Create Item</button>
+      </div>
+      <div class='col-sm-6 text-right'>
+         <input class='form-control' type='text' id='search' />
+         <button class='btn btn-primary' onclick='onClickSearch()'>Search</button>
+      </div>
+   </div>
+
    <br><br>
    <table class="table table-hover">
       <thead>
@@ -23,7 +32,7 @@
             <td>{{unit}}</td>
             <td>{{soh}}</td>
             <td>
-               <a href='#' onclick='Supermarket.loadPanel("item/{{id}}/edit?pageAmount={{../pageAmount}}&pageOffset={{../offset}}")'>Edit</a>
+               <a href='#' onclick='Supermarket.loadPanel("item/{{id}}/edit?search={{../search}}&pageAmount={{../pageAmount}}&pageOffset={{../offset}}")'>Edit</a>
             </td>
          </tr>
          {{/each}}
@@ -34,7 +43,7 @@
    <div class='row'>
       <div class='col-sm-4'>
          {{#if showBackButton}}
-         <button onclick='loadPageOfItems({{pageAmount}}, {{backOffset}})' class='btn btn-primary'>Back</button>
+         <button onclick='loadPageOfItems("{{search}}",{{pageAmount}}, {{backOffset}})' class='btn btn-primary'>Back</button>
          {{/if}}
       </div>
       <div class='col-sm-4 text-center' style='line-height:40px;'>
@@ -42,14 +51,22 @@
       </div>
       <div class='col-sm-4 text-right'>
          {{#if showNextButton}}
-         <button onclick='loadPageOfItems({{pageAmount}}, {{nextOffset}})' class='btn btn-primary'>Next</button>
+         <button onclick='loadPageOfItems("{{search}}",{{pageAmount}}, {{nextOffset}})' class='btn btn-primary'>Next</button>
          {{/if}}
       </div>
    </div>
 </div>
 <script>
-   function loadPageOfItems(amount, offset){
-      Supermarket.loadPanel("item-management?amount=" + amount + "&offset=" + offset);
+   function loadPageOfItems(search, amount, offset){
+      if (search != null && search != ""){
+         Supermarket.loadPanel("item-management?search=" + search + "&amount=" + amount + "&offset=" + offset);
+      } else {
+         Supermarket.loadPanel("item-management?amount=" + amount + "&offset=" + offset);
+      }
    }
 
+   function onClickSearch(){
+      var term = $("#search").val();
+      Supermarket.loadPanel("item-management?search=" + term + "&amount={{pageAmount}}&offset=0");
+   }
 </script>
