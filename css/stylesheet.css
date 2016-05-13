@@ -14,7 +14,7 @@ html,body {margin:0; padding:0;}
 
 /* #Global
 ================================================== */
-body {background: #000; margin: 50 auto;}
+body {background: #000; margin: 50 auto; overflow:hidden;}
 
 /* #Container
 ================================================== */
