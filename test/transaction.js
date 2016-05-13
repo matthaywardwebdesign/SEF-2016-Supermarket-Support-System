@@ -155,7 +155,7 @@ module.exports.testCalculate = function(test){
    transaction.calculate(function(){
       test.equal(transaction.getTotal(), testItemData.price * 2.5 + testItem2Data.price * 4, "Failed to calculate transaction total correctly");
       test.equal(transaction.getGST(), testItem2Data.price * 4 * 0.10, "Failed to calculate GST correctly");
-      test.equal(transaction.getNoTransactionItems(), 2, "Failed to correctly calculate number of transaction items");
+      test.equal(transaction.getNoTransactionItems(), 6.5, "Failed to correctly calculate number of transaction items");
       test.equal(transaction.getGSTApplicableTotal(), testItem2Data.price * 4, "Failed to correctly calculate GST Applicable total");
       test.done();
    });

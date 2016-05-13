@@ -54,3 +54,23 @@ input:focus {
 .management-items-table th:hover {
    text-decoration: underline;
 }
+
+#barcode {
+   max-width:100%;
+}
+
+.green-dot {
+   width:10px;
+   height:10px;
+   background:green;
+   border-radius: 5px;
+   display:inline-block;
+}
+
+.red-link {
+   color:#d9534f;
+}
+
+.red-link:hover {
+   color:#d9534f;
+}

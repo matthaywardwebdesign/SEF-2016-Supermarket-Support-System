@@ -8,8 +8,24 @@
       <div id='form-holder'>
 
       </div>
-      <br><hr><br>
-      <img id="barcode"/>
+      <br><br>
+      <div class='row'>
+         <div class='col-sm-4'>
+            <b>Stock On Hand</b>
+            <br><br>
+            <input type='number' class='form-control' value='{{item.soh}}' id='soh' />
+         </div>
+         <div class='col-sm-4'>
+            <b>Reorder Level</b>
+            <br><br>
+            <input type='number' class='form-control' value='{{item.reorderLevel}}' id='reorderLevel' />
+         </div>
+         <div class='col-sm-4'>
+            <b>Reorder Amount</b>
+            <br><br>
+            <input type='number' class='form-control' value='{{item.reorderAmount}}' id='reorderAmount' />
+         </div>
+      </div>
    </div>
    <div class='col-sm-3'>
       <h5><b>Item Actions</b></h5>
@@ -17,6 +33,8 @@
       <button class='btn btn-success' onclick='onClickSave()'>Save Item</button>
       <br><br>
       <button class='btn btn-danger' onclick='onClickDelete()'>Delete Item</button>
+      <br><br>
+      <img id="barcode"/>
    </div>
 </div>
 <script>
@@ -24,7 +42,6 @@ var item = {
    name: "{{item.name}}",
    price: "{{formatDecimal item.price}}",
    ean:"{{item.ean}}",
-   soh:"{{item.soh}}",
    weighted: {{item.isWeighted}},
    gstApplicable: {{item.gstApplicable}}
 };
@@ -32,7 +49,6 @@ var form = [
    {"id":"name", "name":"Name", "type":"text"},
    {"id":"price", "name":"Price", "type":"number"},
    {"id":"ean", "name": "EAN (Barcode)", "type": "number"},
-   {"id":"soh", "name": "Stock On Hand", "type": "number"},
    {"id":"weighted", "name": "Is Weighted", "type":"checkbox"},
    {"id":"gstApplicable", "name": "Is GST Applicable", "type":"checkbox"}
 ];
@@ -58,6 +74,8 @@ function onClickSave(){
    data.price = parseFloat($("#price").val());
    data.ean = parseInt($("#ean").val());
    data.soh = parseInt($("#soh").val());
+   data.reorderAmount = parseInt($("#reorderAmount").val());
+   data.reorderLevel = parseInt($("#reorderLevel").val());
    data.isWeighted = $("#weighted").is(":checked");
    data.gstApplicable = $("#gstApplicable").is(":checked");
    console.log(data);

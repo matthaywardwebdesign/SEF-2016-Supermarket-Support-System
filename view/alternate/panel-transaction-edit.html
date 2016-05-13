@@ -1,0 +1,75 @@
+<button class='btn btn-primary' onclick='loadPageOfTransactions({{pageAmount}},{{pageOffset}})'>Back</button>
+<br><br>
+<div class='row'>
+   <div class='col-sm-9'>
+      <h4>Edit Transaction - {{transaction.id}}</h4>
+      <br>
+      <b>Date: </b>{{transaction.date}}
+      <br>
+      <b>Customer Number: </b>{{transaction.customerNo}}
+      <hr>
+      <div class='row'>
+         <div class='col-sm-4'>
+            <h2>${{formatDecimal transaction.total}}</h2>
+            <b>Transaction Total</b>
+         </div>
+         <div class='col-sm-4'>
+            <h2>${{formatDecimal transaction.gst}}</h2>
+            <b>G.S.T</b>
+         </div>
+         <div class='col-sm-4'>
+            <h2>{{transaction.noTransactionItems}}</h2>
+            <b>Number of Items</b>
+         </div>
+      </div>
+      <br>
+      <hr>
+      <table class="table table-hover">
+         <thead>
+            <tr>
+               <th>Qty</th>
+               <th>Product Name</th>
+               <th>Product No</th>
+               <th>Price</th>
+               <th>Per</th>
+               <th>Subtotal</th>
+               <th>Remove</th>
+            </tr>
+         </thead>
+         <tbody>
+            {{#each transaction.items}}
+            <tr>
+               <td>{{qty}}</td>
+               <td>{{item.name}}</td>
+               <td>{{item.id}}</td>
+               <td>{{formatDecimal item.price}}</td>
+               <td>{{item.unit}}</td>
+               <td>{{formatDecimal lineTotal}}</td>
+               <td>
+                  <a href='#' onclick='removeTransactionItem({{item.id}})' class='red-link'>Remove Item</a>
+               </td>
+            </tr>
+            {{/each}}
+         </tbody>
+      </table>
+   </div>
+   <div class='col-sm-3'>
+      <h5><b>Transaction Actions</b></h5>
+      <br><br>
+      <button class='btn btn-danger' onclick='onClickDelete()'>Delete Transaction</button>
+   </div>
+</div>
+<script>
+
+function onClickDelete(){
+   API.post("transaction/{{transaction.id}}/delete", {}, function(){
+      loadPageOfTransactions({{pageAmount}},{{pageOffset}});
+   });
+}
+
+function removeTransactionItem(id){
+   API.post("transaction/{{transaction.id}}/items/remove", {id: id}, function(){
+      Supermarket.loadPanel("transaction/{{transaction.id}}/edit?pageAmount={{pageAmount}}&pageOffset={{pageOffset}}");
+   });
+}
+</script>

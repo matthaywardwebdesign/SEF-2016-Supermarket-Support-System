@@ -1,3 +1,67 @@
 <div class='panel panel-default'>
    <h3>Transaction Management</h3>
+   <br>
+   <table class="table table-hover management-transaction-table">
+      <thead>
+         <tr>
+            <th></th>
+            <th>ID</th>
+            <th>Created</th>
+            <th>Total Amount</th>
+            <th>Number of Items</th>
+            <th>Customer Number</th>
+            <th>Load</th>
+            <th>Edit</th>
+         </tr>
+      </thead>
+      <tbody>
+         {{#each transactions}}
+         <tr>
+            <td>
+               {{#if currentTransaction}}
+               <div class='green-dot'></div>
+               {{/if}}
+            </td>
+            <td>{{id}}</td>
+            <td>{{date}}</td>
+            <td>{{formatDecimal total}}</td>
+            <td>{{noTransactionItems}}</td>
+            <td>{{customerNo}}</td>
+            <td>
+               <a href='#' onclick='loadExistingTransaction({{id}})'>Load</a>
+            </td>
+            <td>
+               <a href='#' onclick='Supermarket.loadPanel("transaction/{{id}}/edit?pageAmount={{../pageAmount}}&pageOffset={{../offset}}")'>Edit</a>
+            </td>
+         </tr>
+         {{/each}}
+      </tbody>
+   </table>
+   <br><br>
+   <hr>
+   <div class='row'>
+      <div class='col-sm-4'>
+         {{#if showBackButton}}
+         <button onclick='loadPageOfTransactions({{pageAmount}}, {{backOffset}})' class='btn btn-primary'>Back</button>
+         {{/if}}
+      </div>
+      <div class='col-sm-4 text-center' style='line-height:40px;'>
+         Page {{pageNumber}}
+      </div>
+      <div class='col-sm-4 text-right'>
+         {{#if showNextButton}}
+         <button onclick='loadPageOfTransactions({{pageAmount}}, {{nextOffset}})' class='btn btn-primary'>Next</button>
+         {{/if}}
+      </div>
+   </div>
 </div>
+<script>
+   function loadPageOfTransactions(amount, offset){
+      Supermarket.loadPanel("transaction-management?amount=" + amount + "&offset=" + offset);
+   }
+
+   function loadExistingTransaction(id){
+      Cookies.set("currentTransaction",id);
+      window.location.href = '/items';
+   }
+</script>

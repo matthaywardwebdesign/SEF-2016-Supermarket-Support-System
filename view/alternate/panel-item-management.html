@@ -6,7 +6,7 @@
          <button class='btn btn-primary' onclick='Supermarket.loadPanel("item-create?pageAmount={{pageAmount}}&pageOffset={{offset}}")'>Create Item</button>
       </div>
       <div class='col-sm-6 text-right'>
-         <input class='form-control' type='text' id='search' />
+         <input class='form-control' type='text' id='search' value='{{search}}' />
          <button class='btn btn-primary' onclick='onClickSearch()'>Search</button>
       </div>
    </div>
@@ -20,6 +20,7 @@
             <th onclick='sortItemsBy("price")' id='sort-price'>Price</th>
             <th>Unit</th>
             <th onclick='sortItemsBy("soh")' id='sort-soh'>SOH</th>
+            <th>SOO</th>
             <th>Edit</th>
          </tr>
       </thead>
@@ -31,6 +32,7 @@
             <td>{{formatDecimal price}}</td>
             <td>{{unit}}</td>
             <td>{{soh}}</td>
+            <td>{{soo}}</td>
             <td>
                <a href='#' onclick='Supermarket.loadPanel("item/{{id}}/edit?search={{../search}}&pageAmount={{../pageAmount}}&pageOffset={{../offset}}&sort={{../sort}}")'>Edit</a>
             </td>

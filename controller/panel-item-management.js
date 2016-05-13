@@ -33,6 +33,9 @@ module.exports.run = function(req, res, template){
    if (search == ""){
       items.getPageOfItems(amount, offset, sort, function (err, items){
          data.items = items;
+         for (var i = 0; i < data.items.length; i++){
+            data.items[i].soo = data.items[i].getSOO();
+         }
          if (items.length == amount){
             data.showNextButton = true;
          }
@@ -42,6 +45,9 @@ module.exports.run = function(req, res, template){
       data.search = search;
       items.getPageOfSearchItems(search, amount, offset, sort, function (err, items){
          data.items = items;
+         for (var i = 0; i < data.items.length; i++){
+            data.items[i].soo = data.items[i].getSOO();
+         }
          if (items.length == amount){
             data.showNextButton = true;
          }
