@@ -18,13 +18,18 @@
   <!--Container-->
   <div class="container">
      <br><br>
-    <div class="row">
+    <div class="row header">
       <div class='col-sm-6'>
-         <img src='assets/images/rmit.jpg' height='40px' style='float:left;margin-right:20px;' />
          {{#if inATransaction}}
-         <a href="/items"><h4>Supermarket Support System</h4></a>
+         <a href="/items">
+            <img src='assets/images/rmit.jpg' height='40px' style='float:left;margin-right:20px;' />
+            <h4>Supermarket Support System</h4>
+         </a>
          {{else}}
-         <a href="/"><h4>Supermarket Support System</h4></a>
+         <a href="/">
+            <img src='assets/images/rmit.jpg' height='40px' style='float:left;margin-right:20px;' />
+            <h4>Supermarket Support System</h4>
+         </a>
          {{/if}}
       </div>
       <div class='col-sm-6'>
