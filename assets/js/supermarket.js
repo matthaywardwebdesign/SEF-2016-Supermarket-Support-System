@@ -17,6 +17,12 @@ var Supermarket = {};
       $("#panel-holder").load("/panel/" + panel);
    }
 
+   Supermarket.getItemByID = function(id, callback){
+      API.get("item/" + id, {}, function (data){
+         callback(data);
+      });
+   }
+
    Supermarket.createForm = function(selector, id, fields, data){
       var form = "<div id='form-" + id + "'>";
       for (var i = 0; i < fields.length; i++){

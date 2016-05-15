@@ -3,7 +3,12 @@
 <div class='row'>
    <div class='col-sm-9'>
       <h4>Create Item</h4>
-      <br><br>
+      <br>
+      <div id='error-id-taken' class='alert alert-danger'>
+         This ID is already being used by <b><span class='name'></span></b><br>
+         Continuing to use this ID will overwrite that products information.
+      </div>
+      <br>
       <div id='form-holder'>
 
       </div>
@@ -90,4 +95,17 @@ function onClickDelete(){
       loadPageOfItems("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
    });
 }
+
+$("#error-id-taken").hide();
+$("#id").change(function(){
+   var id = parseInt($("#id").val());
+   Supermarket.getItemByID(id, function (item){
+      if (item.id != null){
+         $("#error-id-taken .name").text(item.name);
+         $("#error-id-taken").fadeIn();
+      } else {
+         $("#error-id-taken").fadeOut();
+      }
+   });
+});
 </script>

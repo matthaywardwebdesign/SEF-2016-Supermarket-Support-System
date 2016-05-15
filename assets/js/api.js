@@ -1,5 +1,5 @@
 var API = {};
-API.get = function(endpoint, data){
+API.get = function(endpoint, data, callback){
    $.get("/api/" + endpoint, data, function (result){
       callback(result);
    });
