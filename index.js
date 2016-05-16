@@ -17,12 +17,5 @@ var api = require("./lib/api.js");
 //
 
 db.connect(function(err){
-   if (!err){
-      var t = new Transaction({"id":12, "customerNo": 1, "date": new Date()});
-      t.addItemByID(133211, 2.5);
-      t.addItemByID(12345, 2);
-      transactions.saveTransaction(t, function (err){console.log(err)});
-   } else {
-      console.log(err);
-   }
+
 });

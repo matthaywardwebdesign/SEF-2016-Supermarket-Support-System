@@ -1,7 +1,7 @@
 <div class="panel panel-default">
    <h4>Select Quantity - {{item.name}}</h4>
    <hr>
-   <input class='form-control input-large' id='item-qty' type='number' min="0" value="0"/>
+   <input class='form-control input-large' id='item-qty' type='number' min="1" value="1"/>
    <br>
-   <button class='btn btn-primary btn-large' onclick='onClickAddQuantity({{item.id}},$("#item-qty").val())'>Add</button>
+   <button class='btn btn-primary btn-large' onclick='onClickAddQuantity({{item.id}},Math.floor($("#item-qty").val()))'>Add</button>
 </div>
