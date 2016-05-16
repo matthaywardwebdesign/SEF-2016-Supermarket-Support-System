@@ -23,6 +23,19 @@ var Supermarket = {};
       });
    }
 
+   Supermarket.loadBlackoutPanel = function(panel){
+      $(".blackout").fadeIn();
+      $(".blackout-panel").load("/panel/" + panel);
+   }
+
+   Supermarket.showItemDetails = function(id){
+      Supermarket.loadBlackoutPanel("item/" + id);
+   }
+
+   Supermarket.hideBlackoutPanel = function(){
+      $(".blackout").fadeOut();
+   }
+
    Supermarket.createForm = function(selector, id, fields, data){
       var form = "<div id='form-" + id + "'>";
       for (var i = 0; i < fields.length; i++){
