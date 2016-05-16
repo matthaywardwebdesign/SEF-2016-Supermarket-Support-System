@@ -12,7 +12,9 @@ var testData = {
    "maxQty": 8 ,
     "type": "N/A" ,
     "amount": 4.50 ,
-    "itemID": 1
+    "itemID": 1 ,
+    "startDate": "Thu Apr 21 2016 10:08:05 GMT+1000 (AEST)" ,
+    "endDate": "Sat Apr 23 2016 10:08:05 GMT+1000 (AEST)"
 }
 
 tests.before = function(done){
@@ -128,7 +130,7 @@ module.exports.testSetAmount = function(test){
    test.done();
 }
 
-module.exports.testgetItemID = function(test){
+module.exports.testGetItemID = function(test){
    var special = new Special(testData);
    test.expect(1);
    test.equal(special.getItemID(), testData.itemID, "Failed to get itemID of Special");
@@ -141,6 +143,21 @@ module.exports.testSetItemID = function(test){
    special.setItemID(5);
    test.expect(1);
    test.equal(special.getItemID(), 5, "Failed to set Special item ID");
+   test.done();
+}
+
+
+module.exports.testGetStartDate = function(test){
+   var special = new Special(testData);
+   test.expect(1);
+   test.equal(special.getStartDate(), testData.startDate, "Failed to get start date of a Special");
+   test.done();
+}
+
+module.exports.testGetEndDate = function(test){
+   var special = new Special(testData);
+   test.expect(1);
+   test.equal(special.getEndDate(), testData.endDate, "Failed to get end date of a Special");
    test.done();
 }
 
