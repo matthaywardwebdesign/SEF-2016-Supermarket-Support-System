@@ -15,7 +15,7 @@
    padding:20px!important;
 }
 
-.transaction-holder {
+.transaction-holder, .panel-scroll {
    height:500px;
    overflow:scroll;
 }

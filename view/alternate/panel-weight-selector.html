@@ -1,1 +1,7 @@
-Select Weight
+<div class="panel panel-default">
+   <h4>Select Weight - {{item.name}}</h4>
+   <hr>
+   <input class='form-control input-large' id='item-qty' type='number' min="1" value="1"/>
+   <br>
+   <button class='btn btn-primary btn-large' onclick='onClickAddQuantity({{item.id}},$("#item-qty").val())'>Add</button>
+</div>
