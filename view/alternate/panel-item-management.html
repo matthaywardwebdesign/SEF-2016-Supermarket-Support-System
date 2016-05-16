@@ -72,7 +72,7 @@
    }
 
    function onClickSearch(){
-      var term = $("#search").val();
+      var term = encodeURI($("#search").val());
       Supermarket.loadPanel("item-management?search=" + term + "&amount={{pageAmount}}&offset=0");
    }
 
