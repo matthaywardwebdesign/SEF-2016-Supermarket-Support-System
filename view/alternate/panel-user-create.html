@@ -1,0 +1,111 @@
+<button class='btn btn-primary' onclick='loadPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}")'>Back</button>
+<br><br>
+<div class='row'>
+   <div class='col-sm-9'>
+      <h4>Create User</h4>
+      <br>
+      <div id='error-id-taken' class='alert alert-danger'>
+         This ID is already being used by <b><span class='name'></span></b><br>
+         Continuing to use this ID will overwrite that products information.
+      </div>
+      <br>
+      <div id='form-holder'>
+
+      </div>
+      <br><br>
+      <div class='row'>
+         <div class='col-sm-4'>
+            <b>Stock On Hand</b>
+            <br>
+            <input type='number' class='form-control' value='{{item.soh}}' id='soh' />
+         </div>
+         <div class='col-sm-4'>
+            <b>Reorder Level</b>
+            <br>
+            <input type='number' class='form-control' value='{{item.reorderLevel}}' id='reorderLevel' />
+         </div>
+         <div class='col-sm-4'>
+            <b>Reorder Amount</b>
+            <br>
+            <input type='number' class='form-control' value='{{item.reorderAmount}}' id='reorderAmount' />
+         </div>
+      </div>
+   </div>
+   <div class='col-sm-3'>
+      <h5><b>Item Actions</b></h5>
+      <br><br>
+      <button class='btn btn-success' onclick='onClickSave()'>Create Item</button>
+      <br><br>
+      <img id="barcode"/>
+   </div>
+</div>
+<script>
+var item = {
+   id: 0,
+   name: "",
+   price: "0.00",
+   ean:"",
+   weighted: false,
+   gstApplicable: false
+};
+var form = [
+   {"id":"id", "name":"ID", "type":"number"},
+   {"id":"name", "name":"Name", "type":"text"},
+   {"id":"price", "name":"Price", "type":"number"},
+   {"id":"ean", "name": "EAN (Barcode)", "type": "number"},
+   {"id":"weighted", "name": "Is Weighted", "type":"checkbox"},
+   {"id":"gstApplicable", "name": "Is GST Applicable", "type":"checkbox"}
+];
+Supermarket.createForm("#form-holder", "item-form",form,item);
+generateBarcode();
+
+$("#ean").keyup(function(){
+   generateBarcode();
+});
+
+function generateBarcode(){
+   if ($("#ean").val().length > 0){
+      if ($("#ean").val().length == 13){
+         $("#barcode").JsBarcode($("#ean").val(), {format: "ean13"});
+      } else {
+         $("#barcode").JsBarcode($("#ean").val());
+      }
+   }
+}
+
+function onClickSave(){
+   var data = {};
+   data.id = parseInt($("#id").val());
+   data.name = $("#name").val();
+   data.price = parseFloat($("#price").val());
+   data.ean = parseInt($("#ean").val());
+   data.soh = parseInt($("#soh").val());
+   data.reorderLevel = parseInt($("#reorderLevel").val());
+   data.reorderAmount = parseInt($("#reorderAmount").val());
+   data.isWeighted = $("#weighted").is(":checked");
+   data.gstApplicable = $("#gstApplicable").is(":checked");
+   console.log(data);
+   API.post("item/" + data.id + "/edit", data, function(){
+      loadPageOfItems("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
+   });
+}
+
+function onClickDelete(){
+   API.post("item/{{item.id}}/delete", {}, function(){
+      loadPageOfItems("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
+   });
+}
+
+$("#error-id-taken").hide();
+$("#id").change(function(){
+   var id = parseInt($("#id").val());
+   Supermarket.getItemByID(id, function (item){
+      if (item.id != null){
+         $("#error-id-taken .name").text(item.name);
+         $("#error-id-taken").fadeIn();
+      } else {
+         $("#error-id-taken").fadeOut();
+      }
+   });
+});
+</script>

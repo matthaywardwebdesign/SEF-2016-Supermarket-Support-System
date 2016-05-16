@@ -1,0 +1,56 @@
+<button class='btn btn-primary' onclick='getPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}")'>Back</button>
+<br><br>
+<div class='row'>
+   <div class='col-sm-9'>
+      <h4>Edit customer - {{customer.id}}</h4>
+      <b>Customer ID: {{customer.id}}</b>
+      <br><br>
+      <div id='form-holder'>
+
+      </div>
+      <br><br>
+   </div>
+   <div class='col-sm-3'>
+      <h5><b>Customer Actions</b></h5>
+      <br><br>
+      <button class='btn btn-success' onclick='onClickSave()'>Save Customer</button>
+      <br><br>
+      <button class='btn btn-danger' onclick='onClickDelete()'>Delete Customer</button>
+      <br><br>
+      <img id="barcode"/>
+   </div>
+</div>
+<script>
+var customer = {
+   firstName: "{{customer.firstName}}",
+   lastName:"{{customer.lastName}}",
+};
+var form = [
+   {"id":"firstName", "name":"First Name", "type":"text"},
+   {"id":"lastName", "name": "Last Name", "type": "text"},
+];
+Supermarket.createForm("#form-holder", "customer-form",form,customer);
+generateBarcode();
+
+$("#id").keyup(function(){
+   generateBarcode();
+});
+
+
+function onClickSave(){
+   var data = {};
+   data.id = {{customer.id}};
+   data.firstName = $("#firstName").val();
+   data.lastName = $("#lastName").val();
+   console.log(data);
+   API.post("customer/{{customer.id}}/edit", data, function(){
+      getPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
+   });
+}
+
+function onClickDelete(){
+   API.post("customer/{{customer.id}}/delete", {}, function(){
+      getPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
+   });
+}
+</script>

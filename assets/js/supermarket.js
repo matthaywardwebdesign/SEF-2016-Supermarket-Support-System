@@ -23,6 +23,12 @@ var Supermarket = {};
       });
    }
 
+   Supermarket.getCustomerByID = function(id, callback){
+      API.get("customer/" + id, {}, function (data){
+         callback(data);
+      });
+   }
+
    Supermarket.loadBlackoutPanel = function(panel){
       $(".blackout").fadeIn();
       $(".blackout-panel").load("/panel/" + panel);

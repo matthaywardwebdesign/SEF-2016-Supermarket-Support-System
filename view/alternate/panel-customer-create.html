@@ -1,0 +1,100 @@
+<button class='btn btn-primary' onclick='loadPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}")'>Back</button>
+<br><br>
+<div class='row'>
+   <div class='col-sm-9'>
+      <h4>Create User</h4>
+      <br>
+      <div id='error-id-taken' class='alert alert-danger'>
+         This ID is already being used by <b><span class='name'></span></b><br>
+         Continuing to use this ID will overwrite that products information.
+      </div>
+      <br>
+      <div id='form-holder'>
+
+      </div>
+      <br><br>
+      <div class='row'>
+         <div class='col-sm-4'>
+            <b>Stock On Hand</b>
+            <br>
+            <input type='number' class='form-control' value='{{item.soh}}' id='soh' />
+         </div>
+         <div class='col-sm-4'>
+            <b>Reorder Level</b>
+            <br>
+            <input type='number' class='form-control' value='{{item.reorderLevel}}' id='reorderLevel' />
+         </div>
+         <div class='col-sm-4'>
+            <b>Reorder Amount</b>
+            <br>
+            <input type='number' class='form-control' value='{{item.reorderAmount}}' id='reorderAmount' />
+         </div>
+      </div>
+   </div>
+   <div class='col-sm-3'>
+      <h5><b>Item Actions</b></h5>
+      <br><br>
+      <button class='btn btn-success' onclick='onClickSave()'>Create Item</button>
+      <br><br>
+      <img id="barcode"/>
+   </div>
+</div>
+<script>
+var item = {
+   id: 0,
+   firstName: '',
+   lastName:'',
+};
+var form = [
+   {"id":"id", "name":"User ID", "type":"number"},
+   {"id":"firstName", "name":"First Name", "type":"text"},
+   {"id":"lastName", "name":"Last Name", "type":"text"},
+];
+Supermarket.createForm("#form-holder", "item-form",form,item);
+generateBarcode();
+
+$("#id").keyup(function(){
+   generateBarcode();
+});
+
+function generateBarcode(){
+   if ($("#id").val().length > 0){
+      if ($("#id").val().length == 13){
+         $("#barcode").JsBarcode($("#id").val(), {format: "ean13"});
+      } else {
+         $("#barcode").JsBarcode($("#id").val());
+      }
+   }
+}
+
+function onClickSave(){
+   var data = {};
+   data.id = parseInt($("#id").val());
+   data.firstName = $("#firstName").val();
+   data.lastName = $("#lastName").val();
+
+   console.log(data);
+   API.post("customer/" + data.id + "/edit", data, function(){
+      getPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
+   });
+}
+
+function onClickDelete(){
+   API.post("item/{{item.id}}/delete", {}, function(){
+      getPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
+   });
+}
+
+$("#error-id-taken").hide();
+$("#id").change(function(){
+   var id = parseInt($("#id").val());
+   Supermarket.getCustomerByID(id, function (item){
+      if (item.id != null){
+         $("#error-id-taken .name").text(item.name);
+         $("#error-id-taken").fadeIn();
+      } else {
+         $("#error-id-taken").fadeOut();
+      }
+   });
+});
+</script>
