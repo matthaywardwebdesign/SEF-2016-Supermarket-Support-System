@@ -93,3 +93,17 @@ input:focus {
    margin-top: 40px;
    padding:20px;
 }
+
+.payment-method {
+   padding:20px;
+   border:1px solid #B7B7B7;
+   border-radius: 5px;
+   margin-bottom: 20px;
+}
+
+.payment-method:hover {
+   background:#337ab7;
+   color:#FFF;
+   border: 1px solid #FFF;
+   cursor: pointer;
+}

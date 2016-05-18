@@ -1,0 +1,31 @@
+<div class="panel panel-default text-center">
+   <button class='btn btn-primary btn-large' onclick='Supermarket.loadPanel("transaction-details")'>Back</button>
+   <hr>
+   <h3>Pay Now</h3>
+   <br>
+   <h5>Please select payment method</h5>
+   <br><br>
+   <div class='row'>
+   <div class='col-sm-4'>
+      <div class='payment-method'>
+         Cash
+         <br>
+         <small>${{formatDecimal transaction.total}}</small>
+      </div>
+   </div>
+   <div class='col-sm-4'>
+      <div class='payment-method'>
+         Card
+         <br>
+         <small>${{formatDecimal transaction.total}}</small>
+      </div>
+   </div>
+   <div class='col-sm-4'>
+      <div class='payment-method'>
+         Bitcoin
+         <br>
+         <small>{{formatBitcoin transaction.total}} BTC</small>
+      </div>
+   </div>
+</div>
+</div>
