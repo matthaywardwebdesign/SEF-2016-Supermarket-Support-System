@@ -82,4 +82,8 @@ var Supermarket = {};
       $(selector).append(form);
    }
 
+   Supermarket.say = function(text){
+      $.get("/say/" + text);
+   }
+
 })();
