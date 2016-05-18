@@ -83,7 +83,8 @@ var Supermarket = {};
    }
 
    Supermarket.say = function(text){
-      $.get("/say/" + text);
+      var msg = new SpeechSynthesisUtterance(text);
+      window.speechSynthesis.speak(msg);
    }
 
 })();
