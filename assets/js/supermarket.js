@@ -13,12 +13,31 @@ var Supermarket = {};
       });
    }
 
+   Supermarket.addItemByBarcode = function(barcode){
+      Supermarket.getItemByEAN(barcode, function (item){
+         if (item.id != null && item.isWeighted == false){
+            Supermarket.addItem(item.id, 1, function(){
+               console.log("Item added");
+               var audio = new Audio('assets/beep.mp3');
+               audio.play();
+               Supermarket.loadPanel("transaction-details");
+            });
+         }
+      });
+   }
+
    Supermarket.loadPanel = function(panel){
       $("#panel-holder").load("/panel/" + panel);
    }
 
    Supermarket.getItemByID = function(id, callback){
       API.get("item/" + id, {}, function (data){
+         callback(data);
+      });
+   }
+
+   Supermarket.getItemByEAN = function(ean, callback){
+      API.get("item/ean/" + ean, {}, function (data){
          callback(data);
       });
    }

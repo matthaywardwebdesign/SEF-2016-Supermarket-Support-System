@@ -10,8 +10,29 @@
          <br><br>
          <button class='btn btn-primary btn-large' onclick='Supermarket.loadPanel("call-staff-member")'>Call Staff Member</button>
       </div>
+      <div class="panel panel-default">
+         <input class='form-control' type='number' id='item-id-input' />
+      </div>
    </div>
 </div>
 <script>
    Supermarket.loadPanel("transaction-details");
+   $("#item-id-input").focus();
+   setInterval(function(){
+      $("input").on('blur', function(){
+         setTimeout(function(){
+            if ($(document.activeElement).first().prop("nodeName") != "INPUT"){
+               $("#item-id-input").focus();
+            };
+         }, 10);
+      });
+   }, 500);
+
+   $("#item-id-input").keypress(function(e){
+      if (e.which == 13){
+         Supermarket.addItemByBarcode($("#item-id-input").val());
+         $("#item-id-input").val("");
+      }
+   });
+
 </script>
