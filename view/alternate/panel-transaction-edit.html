@@ -7,19 +7,27 @@
       <b>Date: </b>{{transaction.date}}
       <br>
       <b>Customer Number: </b>{{transaction.customerNo}}
+      <br>
+      {{#if transaction.paid}}
+      <b>Payment Method: </b>{{transaction.paymentType}}
+      {{/if}}
       <hr>
       <div class='row'>
-         <div class='col-sm-4'>
+         <div class='col-sm-3'>
             <h2>${{formatDecimal transaction.total}}</h2>
             <b>Transaction Total</b>
          </div>
-         <div class='col-sm-4'>
+         <div class='col-sm-3'>
             <h2>${{formatDecimal transaction.gst}}</h2>
             <b>G.S.T</b>
          </div>
-         <div class='col-sm-4'>
+         <div class='col-sm-3'>
             <h2>{{transaction.noTransactionItems}}</h2>
             <b>Number of Items</b>
+         </div>
+         <div class='col-sm-3'>
+            <h2>{{{paymentStatus transaction.status}}}</h2>
+            <b>Status</b>
          </div>
       </div>
       <br>
@@ -33,21 +41,25 @@
                <th>Price</th>
                <th>Per</th>
                <th>Subtotal</th>
+               {{#if transaction.open}}
                <th>Remove</th>
+               {{/if}}
             </tr>
          </thead>
          <tbody>
             {{#each transaction.items}}
             <tr>
                <td>{{qty}}</td>
-               <td>{{item.name}}</td>
+               <td><a href='#' onclick='Supermarket.showItemDetails({{item.id}})'>{{item.name}}</a></td>
                <td>{{item.id}}</td>
                <td>{{formatDecimal item.price}}</td>
                <td>{{item.unit}}</td>
                <td>{{formatDecimal lineTotal}}</td>
+               {{#if ../transaction.open}}
                <td>
                   <a href='#' onclick='removeTransactionItem({{item.id}})' class='red-link'>Remove Item</a>
                </td>
+               {{/if}}
             </tr>
             {{/each}}
          </tbody>
@@ -56,7 +68,9 @@
    <div class='col-sm-3'>
       <h5><b>Transaction Actions</b></h5>
       <br><br>
-      <button class='btn btn-danger' onclick='onClickDelete()'>Delete Transaction</button>
+      {{#if transaction.open}}
+      <button class='btn btn-danger' onclick='onClickDelete()'>Cancel Transaction</button>
+      {{/if}}
    </div>
 </div>
 <script>

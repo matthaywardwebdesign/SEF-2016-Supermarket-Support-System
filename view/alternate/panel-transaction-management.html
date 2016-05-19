@@ -10,6 +10,7 @@
             <th>Total Amount</th>
             <th>Number of Items</th>
             <th>Customer Number</th>
+            <th>Status</th>
             <th>Load</th>
             <th>Edit</th>
          </tr>
@@ -27,8 +28,11 @@
             <td>{{formatDecimal total}}</td>
             <td>{{noTransactionItems}}</td>
             <td>{{customerNo}}</td>
+            <td>{{{paymentStatus status}}}
             <td>
+               {{#if open}}
                <a href='#' onclick='loadExistingTransaction({{id}})'>Load</a>
+               {{/if}}
             </td>
             <td>
                <a href='#' onclick='Supermarket.loadPanel("transaction/{{id}}/edit?pageAmount={{../pageAmount}}&pageOffset={{../offset}}")'>Edit</a>

@@ -35,6 +35,12 @@ module.exports.run = function(req, res, template){
          if (data.transactions[i].id == parseInt(req.cookies.currentTransaction)){
             data.transactions[i].currentTransaction = true;
          }
+
+         if (data.transactions[i].status == "open"){
+            data.transactions[i].open = true;
+         } else {
+            data.transactions[i].closed = true;
+         }
       }
       if (transactions.length == amount){
          data.showNextButton = true;

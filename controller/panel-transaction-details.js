@@ -9,7 +9,15 @@ module.exports.run = function(req, res, template){
       if (err == error.ERROR_TRANSACTION_NO_EXIST){
          res.clearCookie("currentTransaction");
          res.send("<script>document.location.href='/';</script>");
+         return;
       }
+
+      if (transaction.status != "open"){
+         res.clearCookie("currentTransaction");
+         res.send("<script>document.location.href='/';</script>");
+         return;
+      }
+
       if (err){res.end(err);return;}
          transaction.calculate(function (){
             console.log(transaction);

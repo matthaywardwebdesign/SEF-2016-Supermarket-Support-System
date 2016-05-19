@@ -1,6 +1,9 @@
 <div class="panel panel-default transaction-holder">
    <div class="panel-heading-transaction">
-      <p>Transaction No: {{transaction.id}}</br>Date: {{transaction.date}}</p>
+      <p>
+         Transaction No: {{transaction.id}}<br>
+         Date: {{transaction.date}}<br>
+      </p>
    </div>
    <div class="panel-body-transactionAdd">
       <table class="table table-hover">
@@ -42,3 +45,8 @@
       </a>
    </div>
 </div>
+<script>
+if ({{transaction.total}} == 0){
+   $("#payNow").hide();
+}
+</script>

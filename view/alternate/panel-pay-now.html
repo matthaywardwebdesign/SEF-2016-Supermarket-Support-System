@@ -7,21 +7,27 @@
    <br><br>
    <div class='row'>
    <div class='col-sm-4'>
-      <div class='payment-method'>
+      <div class='payment-method' payment-method="cash">
+         <h2><i class="fa fa-usd" aria-hidden="true"></i></h2>
+         <br>
          Cash
          <br>
          <small>${{formatDecimal transaction.total}}</small>
       </div>
    </div>
    <div class='col-sm-4'>
-      <div class='payment-method'>
+      <div class='payment-method' payment-method="card">
+         <h2><i class="fa fa-credit-card" aria-hidden="true"></i></h2>
+         <br>
          Card
          <br>
          <small>${{formatDecimal transaction.total}}</small>
       </div>
    </div>
    <div class='col-sm-4'>
-      <div class='payment-method'>
+      <div class='payment-method' payment-method="bitcoin">
+         <h2><i class="fa fa-btc" aria-hidden="true"></i></h2>
+         <br>
          Bitcoin
          <br>
          <small>{{formatBitcoin transaction.total}} BTC</small>
@@ -31,4 +37,11 @@
 </div>
 <script>
 Supermarket.say("Your transaction comes to a total of {{sayPrice transaction.total}}. Please select your payment method");
+$(".payment-method").click(function(){
+   var method = $(this).attr("payment-method");
+   Supermarket.payTransaction(method, function(){
+      Supermarket.say("Thanks for shopping with RMIT Supermarket. Have a nice day");
+      window.location.href = "/";
+   });
+});
 </script>

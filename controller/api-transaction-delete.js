@@ -1,8 +1,11 @@
 var transactions = require("../lib/transactions.js");
 module.exports.run = function(req, res){
    var id = parseInt(req.params.id);
-   transactions.deleteTransactionByID(id, function (err){
-      console.log(err);
-      res.send({"success": true});
+   transactions.getTransactionByID(id, function (err, transaction){
+      if (err){res.send(err);return;}
+      transaction.setStatus("cancelled");
+      transactions.saveTransaction(transaction, function(){
+         res.send({"success": true});
+      });
    });
 }

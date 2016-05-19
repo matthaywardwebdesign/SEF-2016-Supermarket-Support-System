@@ -27,7 +27,7 @@
       <tbody>
          {{#each items}}
          <tr>
-            <td>{{name}}</td>
+            <td><a href='#' onclick='Supermarket.showItemDetails({{id}})'>{{name}}</a></td>
             <td>{{id}}</td>
             <td>{{formatDecimal price}}</td>
             <td>{{unit}}</td>

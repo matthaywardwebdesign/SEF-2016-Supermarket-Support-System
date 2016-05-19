@@ -10,6 +10,7 @@
 <script>
 $(".blackout").hide();
 function onClickNew(){
+   Supermarket.say("Welcome to RMIT Supermarket. Please scan or lookup an item to begin");
    Supermarket.createTransaction(function (id){
       Cookies.set('currentTransaction', id);
       window.location.href = "/items";

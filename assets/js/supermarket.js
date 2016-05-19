@@ -13,6 +13,13 @@ var Supermarket = {};
       });
    }
 
+   Supermarket.payTransaction = function(method, callback){
+      API.post("transaction/" + Cookies.get("currentTransaction") + "/pay", {method: method}, function(){
+         Cookies.remove("currentTransaction");
+         callback();
+      });
+   }
+
    Supermarket.addItemByBarcode = function(barcode){
       Supermarket.getItemByEAN(barcode, function (item){
          if (item.id != null && item.isWeighted == false){
