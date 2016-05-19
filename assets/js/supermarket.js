@@ -24,9 +24,10 @@ var Supermarket = {};
       Supermarket.getItemByEAN(barcode, function (item){
          if (item.id != null && item.isWeighted == false){
             Supermarket.addItem(item.id, 1, function(){
-               console.log("Item added");
-               var audio = new Audio('assets/beep.mp3');
-               audio.play();
+               if (Cookies.get("beepDisabled") != "true"){
+                  var audio = new Audio('assets/beep.mp3');
+                  audio.play();
+               }
                Supermarket.loadPanel("transaction-details");
             });
          }
@@ -90,8 +91,10 @@ var Supermarket = {};
    }
 
    Supermarket.say = function(text){
-      var msg = new SpeechSynthesisUtterance(text);
-      window.speechSynthesis.speak(msg);
+      if (Cookies.get("voiceOverDisabled") != "true"){
+         var msg = new SpeechSynthesisUtterance(text);
+         window.speechSynthesis.speak(msg);
+      }
    }
 
 })();

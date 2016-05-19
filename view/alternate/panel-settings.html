@@ -1,0 +1,29 @@
+<div class='panel panel-default'>
+   <h3>Settings</h3>
+   <br>
+   <div id='settings-saved-alert' class='alert alert-success' style='display:none'>
+      Settings saved
+   </div>
+   <div id='form-holder'>
+
+   </div>
+   <br><br>
+   <button class='btn btn-success' onclick='saveSettings()'>Save settings</button>
+</div>
+<script>
+var form = [
+   {"id":"voiceOverDisabled", "name": "Voice overs disabled", "type":"checkbox"},
+   {"id":"beepDisabled", "name": "Item added beep disabled", "type":"checkbox"}
+];
+var settings = {
+   voiceOverDisabled: (Cookies.get("voiceOverDisabled") == "true"),
+   beepDisabled: (Cookies.get("beepDisabled") == "true")
+}
+Supermarket.createForm("#form-holder", "settings-form",form,settings);
+
+function saveSettings(){
+   Cookies.set("voiceOverDisabled", $("#voiceOverDisabled").is(":checked"));
+   Cookies.set("beepDisabled", $("#beepDisabled").is(":checked"));
+   $("#settings-saved-alert").hide().fadeIn().delay(1000).fadeOut("slow");
+}
+</script>
