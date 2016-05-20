@@ -15,15 +15,15 @@
       <br><br>
    </div>
    <div class='col-sm-3'>
-      <h5><b>Item Actions</b></h5>
+      <h5><b>Customer Actions</b></h5>
       <br><br>
-      <button class='btn btn-success' onclick='onClickSave()'>Create Item</button>
+      <button class='btn btn-success' onclick='onClickSave()'>Create Customer</button>
       <br><br>
       <img id="barcode"/>
    </div>
 </div>
 <script>
-var item = {
+var customer = {
    id: 0,
    firstName: '',
    lastName:'',
@@ -33,7 +33,7 @@ var form = [
    {"id":"firstName", "name":"First Name", "type":"text"},
    {"id":"lastName", "name":"Last Name", "type":"text"},
 ];
-Supermarket.createForm("#form-holder", "item-form",form,item);
+Supermarket.createForm("#form-holder", "customer-form",form,customer);
 generateBarcode();
 
 $("#id").keyup(function(){
