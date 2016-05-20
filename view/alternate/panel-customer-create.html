@@ -1,4 +1,4 @@
-<button class='btn btn-primary' onclick='loadPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}")'>Back</button>
+<button class='btn btn-primary' onclick='getPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}")'>Back</button>
 <br><br>
 <div class='row'>
    <div class='col-sm-9'>
@@ -63,7 +63,7 @@ function onClickSave(){
 }
 
 function onClickDelete(){
-   API.post("item/{{item.id}}/delete", {}, function(){
+   API.post("customer/{{customer.id}}/delete", {}, function(){
       getPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
    });
 }
@@ -71,9 +71,9 @@ function onClickDelete(){
 $("#error-id-taken").hide();
 $("#id").change(function(){
    var id = parseInt($("#id").val());
-   Supermarket.getCustomerByID(id, function (item){
-      if (item.id != null){
-         $("#error-id-taken .name").text(item.name);
+   Supermarket.getCustomerByID(id, function (customer){
+      if (customer.id != null){
+         $("#error-id-taken .name").text(customer.firstName + " " + customer.lastName);
          $("#error-id-taken").fadeIn();
       } else {
          $("#error-id-taken").fadeOut();
