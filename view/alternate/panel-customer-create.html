@@ -1,4 +1,4 @@
-<button class='btn btn-primary' onclick='loadPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}")'>Back</button>
+<button class='btn btn-primary' onclick='getPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}")'>Back</button>
 <br><br>
 <div class='row'>
    <div class='col-sm-9'>
@@ -6,7 +6,7 @@
       <br>
       <div id='error-id-taken' class='alert alert-danger'>
          This ID is already being used by <b><span class='name'></span></b><br>
-         Continuing to use this ID will overwrite that products information.
+         Continuing to use this ID will overwrite that customers information.
       </div>
       <br>
       <div id='form-holder'>
@@ -71,9 +71,9 @@ function onClickDelete(){
 $("#error-id-taken").hide();
 $("#id").change(function(){
    var id = parseInt($("#id").val());
-   Supermarket.getCustomerByID(id, function (item){
+   Supermarket.getCustomerByID(id, function (customer){
       if (item.id != null){
-         $("#error-id-taken .name").text(item.name);
+         $("#error-id-taken .name").text(customer.firstName + " " + customer.lastName);
          $("#error-id-taken").fadeIn();
       } else {
          $("#error-id-taken").fadeOut();
