@@ -12,6 +12,15 @@
       <div id='form-holder'>
 
       </div>
+      <div>
+         <label for="sel1">User Access Level:</label>
+         <select class="form-control" id="accessLevel">
+         <option>Cashier</option>
+         <option>Warehouse</option>
+         <option>Manager</option>
+      </select>
+      <br>
+      </div>
       <br><br>
    </div>
    <div class='col-sm-3'>
@@ -32,10 +41,9 @@ var user = {
 };
 var form = [
    {"id":"id", "name":"User ID", "type":"number"},
-   {"id":"userName", "name":"User Logon Name", "type":"text"},
+   {"id":"userName", "name":"User Login Name", "type":"text"},
    {"id":"firstName", "name":"First Name", "type":"text"},
    {"id":"lastName", "name":"Last Name", "type":"text"},
-   {"id":"accessLevel", "name":"accessLevel", "type":"text"},
 ];
 Supermarket.createForm("#form-holder", "user-form",form,user);
 generateBarcode();
@@ -63,6 +71,7 @@ function onClickSave(){
    data.accessLevel = $("#accessLevel").val();
 
    console.log(data);
+   console.log("User " + data.firstName + " Created");
    API.post("user/" + data.id + "/edit", data, function(){
       getPageOfUsers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
    });

@@ -2,11 +2,21 @@
 <br><br>
 <div class='row'>
    <div class='col-sm-9'>
-      <h4>Edit User - {{user.id}}</h4>
+      <h4>Edit User - {{user.firstName}} {{user.lastName}}</h4>
       <b>User ID: {{user.id}}</b>
       <br><br>
       <div id='form-holder'>
 
+      </div>
+      <div>
+         <label for="sel1">User Access Level:</label>
+         <select class="form-control" id="accessLevel">
+          <option>{{user.accessLevel}}</option>
+          <option>Cashier</option>
+         <option>Warehouse</option>
+         <option>Manager</option>
+      </select>
+      <br>
       </div>
       <br><br>
    </div>
@@ -22,14 +32,15 @@
 </div>
 <script>
 var user = {
-   firstName: "{{customer.firstName}}",
-   lastName:"{{customer.lastName}}",
+   firstName: "{{user.firstName}}",
+   lastName:"{{user.lastName}}",
+   userName:"{{user.userName}}",
 };
 var form = [
-   {"id":"userName", "name": "Logon User Name", "type": "text"},
    {"id":"firstName", "name":"First Name", "type":"text"},
    {"id":"lastName", "name": "Last Name", "type": "text"},
-   {"id":"accessLevel", "name": "Access Level", "type": "text"},
+   {"id":"userName", "name": "Logon User Name", "type": "text"},
+     //{"id":"accessLevel", "name": "Access Level", "type": "text"},
 ];
 Supermarket.createForm("#form-holder", "user-form",form,user);
 generateBarcode();
