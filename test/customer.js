@@ -9,7 +9,7 @@ var testData = {
    "id":3115,
    "firstName": "John",
    "lastName": "Smith",
-   "loyaltyPoints": 70
+   "loyaltyPoints": 60
 }
 
 tests.before = function(done){
@@ -83,7 +83,7 @@ module.exports.testGetLoyaltyPoints = function(test){
 
 module.exports.testSetLoyaltyPoints = function(test){
    var customer = new Customer(testData);
-   customer.setLastName("70");
+   customer.setLoyaltyPoints(70);
    test.expect(1);
    test.equal(customer.getLoyaltyPoints(), "70", "Failed to set Customer Loyalty Points");
    test.done();
