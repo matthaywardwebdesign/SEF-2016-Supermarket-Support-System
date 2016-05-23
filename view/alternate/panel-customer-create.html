@@ -55,6 +55,7 @@ function onClickSave(){
    data.id = parseInt($("#id").val());
    data.firstName = $("#firstName").val();
    data.lastName = $("#lastName").val();
+   data.loyaltyPoints = 0;
 
    console.log(data);
    API.post("customer/" + data.id + "/edit", data, function(){
