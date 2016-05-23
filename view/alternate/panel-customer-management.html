@@ -14,6 +14,7 @@
             <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <td>Loyalty Pts.</td>
             <th>Edit</th>
          </tr>
       </thead>
@@ -23,6 +24,7 @@
             <td>{{id}}</td>
             <td>{{firstName}}</td>
             <td>{{lastName}}</td>
+            <td>{{loyaltyPoints}}</td>
             <td>
                <a href='#' onclick='Supermarket.loadPanel("customer/{{id}}/edit?search={{../search}}&pageAmount={{../pageAmount}}&pageOffset={{../offset}}&sort={{../sort}}")'>Edit</a>
             </td>
