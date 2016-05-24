@@ -10,11 +10,11 @@ var testData = {
    "name": "discount banana",
    "minQty": 2 ,
    "maxQty": 8 ,
-    "type": "N/A" ,
+    "type": "percentage" ,
     "amount": 4.50 ,
     "itemID": 1 ,
-    "startDate": "Thu Apr 21 2016 10:08:05 GMT+1000 (AEST)" ,
-    "endDate": "Sat Apr 23 2016 10:08:05 GMT+1000 (AEST)"
+    "startDate": new Date() ,
+    "endDate": new Date()
 }
 
 tests.before = function(done){
