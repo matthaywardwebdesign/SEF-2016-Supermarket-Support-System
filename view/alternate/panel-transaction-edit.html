@@ -48,9 +48,9 @@
          </thead>
          <tbody>
             {{#each transaction.items}}
-            <tr>
-               <td>{{qty}}</td>
-               <td><a href='#' onclick='Supermarket.showItemDetails({{item.id}})'>{{item.name}}</a></td>
+            <tr class='text-right'>
+               <td class='text-left'>{{qty}}</td>
+               <td class='text-left'><a href='#' onclick='Supermarket.showItemDetails({{item.id}})'>{{item.name}}</a></td>
                <td>{{item.id}}</td>
                <td>{{formatDecimal item.price}}</td>
                <td>{{item.unit}}</td>
@@ -61,6 +61,19 @@
                </td>
                {{/if}}
             </tr>
+            {{#each specials}}
+            <tr class='text-right grey'>
+               <td></td>
+               <td class='text-left'>{{name}}</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td>-{{formatDecimal amount}}</td>
+               {{#if ../../transaction.open}}
+               <td></td>
+               {{/if}}
+            </tr>
+            {{/each}}
             {{/each}}
          </tbody>
       </table>

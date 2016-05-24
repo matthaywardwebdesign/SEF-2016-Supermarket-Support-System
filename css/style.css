@@ -16,7 +16,7 @@
 }
 
 .transaction-holder, .panel-scroll {
-   height:500px;
+   height:600px;
    overflow:scroll;
 }
 
@@ -122,4 +122,8 @@ input:focus {
 
 ::-webkit-scrollbar-corner {
     background: #FFF;
+}
+
+.grey {
+   color:#696969;
 }
