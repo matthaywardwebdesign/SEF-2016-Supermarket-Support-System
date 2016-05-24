@@ -1,0 +1,91 @@
+<button class='btn btn-primary' onclick='loadPageOfSpecials({{pageAmount}},{{pageOffset}})'>Back</button>
+<br><br>
+<div class='row'>
+   <div class='col-sm-9'>
+      <h4>Edit Special - {{special.id}}</h4>
+      <br>
+      <b>Item: </b> <span id='itemName'>{{item.name}}</span>
+      <br><br>
+      <div id='form-holder'>
+
+      </div>
+   </div>
+   <div class='col-sm-3'>
+      <h5><b>Actions</b></h5>
+      <br>
+      <button class='btn btn-success' onclick='onClickSave()'>Save Special</button>
+      <br><br>
+      <button class='btn btn-danger' onclick='onClickDelete()'>Delete Special</button>
+      <hr>
+      <small>
+         <b>Note: </b> When Apply per Item is ticked this special will apply once
+         and will be calculated based on the quantity of the specified item in the
+         transaction. For example if we create an amount based special with a amount off of
+         $1.00, a minimum quantity of 10 and tick the apply per item option box the special
+         will be calculated as follows - The customer will receive $1 off their transaction if they buy
+         10 or more of the item specified. If the apply per item box is unticked they will recieve $1 off
+         for every single unit of the specified item in their transaction, for example 10 boxes in cereal will result
+         in $10 off compared to $1 off when apply per item is ticked.<br><b>This only applies for amount off specials</b>
+      </small>
+   </div>
+</div>
+<script>
+var special = {
+   "name": "{{special.name}}",
+   "itemID": {{special.itemID}},
+   "type": "{{special.type}}",
+   "amount": "{{formatDecimal special.amount}}",
+   "startDate": "{{niceDate special.startDate}}",
+   "endDate": "{{niceDate special.endDate}}",
+   "minQty": {{special.minQty}},
+   "maxQty": {{special.maxQty}},
+   "applyPerItem": ("{{special.applyPerItem}}" == "true")
+}
+var form = [
+   {"id":"itemID", "name":"Item ID", "type":"number"},
+   {"id":"name", "name":"Name", "type":"text"},
+   {"id":"type", "name": "Type", "type": "select", "values": [
+      {"label":"Percentage Off", "value":"percentage"},
+      {"label":"Amount Off", "value":"amount"}
+   ]
+   },
+   {"id":"amount", "name":"Amount", "type":"number"},
+   {"id":"startDate", "name": "Start Date", "type":"text"},
+   {"id":"endDate", "name": "End Date", "type":"text"},
+   {"id":"minQty", "name": "Minimum Quantity", "type":"number"},
+   {"id":"maxQty", "name": "Maximum Quantity", "type":"number"},
+   {"id":"applyPerItem", "name":"Apply Per Item", "type":"checkbox"}
+];
+Supermarket.createForm("#form-holder", "special-form",form,special);
+$('#startDate').pickadate();
+$('#endDate').pickadate();
+$("#itemID").change(function(){
+   $("#itemName").text("Invalid item");
+   Supermarket.getItemByID(parseInt($("#itemID").val()), function(item){
+      $("#itemName").text(item.name);
+   });
+});
+
+function onClickSave(){
+   var data = {};
+   data.itemID = parseFloat($("#itemID").val());
+   data.name = $("#name").val();
+   data.type = $("#type").val();
+   data.startDate = $("#startDate").val();
+   data.endDate = $("#endDate").val();
+   data.amount = parseFloat($("#amount").val());
+   data.minQty = parseInt($("#minQty").val());
+   data.maxQty = parseInt($("#maxQty").val());
+   data.applyPerItem = $("#applyPerItem").is(":checked");
+   API.post("special/{{special.id}}/edit", data, function(){
+      loadPageOfSpecials({{pageAmount}},{{pageOffset}});
+   });
+}
+
+function onClickDelete(){
+   API.post("special/{{special.id}}/delete", {}, function(){
+      loadPageOfSpecials({{pageAmount}},{{pageOffset}});
+   });
+}
+
+</script>

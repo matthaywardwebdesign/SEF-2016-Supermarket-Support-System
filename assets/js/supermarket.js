@@ -82,6 +82,16 @@ var Supermarket = {};
                checked = "checked";
             }
             form = form + "<b>" + name + "</b><input class='form-control' type='" + type + "' name='" + name + "' id='" + id + "' " + checked + " /><br>";
+         } else if (type == "select"){
+            form = form + "<b>" + name + "</b><br><br><select class='form-control' name='" + name + "' id='" + id + "'>";
+            for (var j = 0; j < fields[i].values.length; j++){
+               var selected = "";
+               if (fields[i].values[j].value == data[id]){
+                  selected = " selected";
+               }
+               form = form + "<option value='" + fields[i].values[j].value + "'" + selected + ">" + fields[i].values[j].label + "</option>";
+            }
+            form = form + "</select><br>";
          } else {
             form = form + "<b>" + name + "</b><br><br><input class='form-control' type='" + type + "' name='" + name + "' id='" + id + "' value='" + value + "' /><br>";
          }

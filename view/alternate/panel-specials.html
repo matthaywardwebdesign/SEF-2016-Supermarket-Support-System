@@ -1,3 +1,61 @@
 <div class='panel panel-default'>
    <h3>Specials / Promotions</h3>
+   <table class="table table-hover management-transaction-table">
+      <thead>
+         <tr>
+            <th></th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Item</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Edit</th>
+         </tr>
+      </thead>
+      <tbody>
+         {{#each specials}}
+         <tr>
+            <td>
+               {{#if active}}
+               <div class='green-dot'></div>
+               {{/if}}
+            </td>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td><a href='#' onclick='Supermarket.showItemDetails({{itemID}})'>{{itemID}}</a></td>
+            <td>{{type}}</td>
+            <td>{{formatDecimal amount}}</td>
+            <td>{{niceDate startDate}}</td>
+            <td>{{niceDate endDate}}</td>
+            <td>
+               <a href='#' onclick='Supermarket.loadPanel("special/{{id}}/edit?pageAmount={{../pageAmount}}&pageOffset={{../offset}}")'>Edit</a>
+            </td>
+         </tr>
+         {{/each}}
+      </tbody>
+   </table>
+   <br><br>
+   <hr>
+   <div class='row'>
+      <div class='col-sm-4'>
+         {{#if showBackButton}}
+         <button onclick='loadPageOfSpecials({{pageAmount}}, {{backOffset}})' class='btn btn-primary'>Back</button>
+         {{/if}}
+      </div>
+      <div class='col-sm-4 text-center' style='line-height:40px;'>
+         Page {{pageNumber}}
+      </div>
+      <div class='col-sm-4 text-right'>
+         {{#if showNextButton}}
+         <button onclick='loadPageOfSpecials({{pageAmount}}, {{nextOffset}})' class='btn btn-primary'>Next</button>
+         {{/if}}
+      </div>
+   </div>
 </div>
+<script>
+   function loadPageOfSpecials(amount, offset){
+      Supermarket.loadPanel("specials?amount=" + amount + "&offset=" + offset);
+   }
+</script>
