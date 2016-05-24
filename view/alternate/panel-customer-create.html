@@ -2,7 +2,7 @@
 <br><br>
 <div class='row'>
    <div class='col-sm-9'>
-      <h4>Create User</h4>
+      <h4>Create Customer</h4>
       <br>
       <div id='error-id-taken' class='alert alert-danger'>
          This ID is already being used by <b><span class='name'></span></b><br>
@@ -15,15 +15,15 @@
       <br><br>
    </div>
    <div class='col-sm-3'>
-      <h5><b>Item Actions</b></h5>
+      <h5><b>Customer Actions</b></h5>
       <br><br>
-      <button class='btn btn-success' onclick='onClickSave()'>Create Item</button>
+      <button class='btn btn-success' onclick='onClickSave()'>Create Customer</button>
       <br><br>
       <img id="barcode"/>
    </div>
 </div>
 <script>
-var item = {
+var customer = {
    id: 0,
    firstName: '',
    lastName:'',
@@ -33,7 +33,7 @@ var form = [
    {"id":"firstName", "name":"First Name", "type":"text"},
    {"id":"lastName", "name":"Last Name", "type":"text"},
 ];
-Supermarket.createForm("#form-holder", "item-form",form,item);
+Supermarket.createForm("#form-holder", "customer-form",form,customer);
 generateBarcode();
 
 $("#id").keyup(function(){
@@ -55,6 +55,7 @@ function onClickSave(){
    data.id = parseInt($("#id").val());
    data.firstName = $("#firstName").val();
    data.lastName = $("#lastName").val();
+   data.loyaltyPoints = 0;
 
    console.log(data);
    API.post("customer/" + data.id + "/edit", data, function(){
@@ -63,7 +64,7 @@ function onClickSave(){
 }
 
 function onClickDelete(){
-   API.post("item/{{item.id}}/delete", {}, function(){
+   API.post("customer/{{customer.id}}/delete", {}, function(){
       getPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
    });
 }
@@ -72,7 +73,11 @@ $("#error-id-taken").hide();
 $("#id").change(function(){
    var id = parseInt($("#id").val());
    Supermarket.getCustomerByID(id, function (customer){
+<<<<<<< HEAD
       if (item.id != null){
+=======
+      if (customer.id != null){
+>>>>>>> 63cf4f69475b601b3efd9694dafc6f7ac6b376d5
          $("#error-id-taken .name").text(customer.firstName + " " + customer.lastName);
          $("#error-id-taken").fadeIn();
       } else {

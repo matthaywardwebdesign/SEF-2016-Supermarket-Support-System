@@ -1,0 +1,71 @@
+<button class='btn btn-primary' onclick='getPageOfUsers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}")'>Back</button>
+<br><br>
+<div class='row'>
+   <div class='col-sm-9'>
+      <h4>Edit User - {{user.firstName}} {{user.lastName}}</h4>
+      <b>User ID: {{user.id}}</b>
+      <br><br>
+      <div id='form-holder'>
+
+      </div>
+      <div>
+         <label for="sel1">User Access Level:</label>
+         <select class="form-control" id="accessLevel">
+          <option>{{user.accessLevel}}</option>
+          <option>Cashier</option>
+         <option>Warehouse</option>
+         <option>Manager</option>
+      </select>
+      <br>
+      </div>
+      <br><br>
+   </div>
+   <div class='col-sm-3'>
+      <h5><b>Customer Actions</b></h5>
+      <br><br>
+      <button class='btn btn-success' onclick='onClickSave()'>Save User</button>
+      <br><br>
+      <button class='btn btn-danger' onclick='onClickDelete()'>Delete User</button>
+      <br><br>
+      <img id="barcode"/>
+   </div>
+</div>
+<script>
+var user = {
+   firstName: "{{user.firstName}}",
+   lastName:"{{user.lastName}}",
+   userName:"{{user.userName}}",
+};
+var form = [
+   {"id":"firstName", "name":"First Name", "type":"text"},
+   {"id":"lastName", "name": "Last Name", "type": "text"},
+   {"id":"userName", "name": "Logon User Name", "type": "text"},
+     //{"id":"accessLevel", "name": "Access Level", "type": "text"},
+];
+Supermarket.createForm("#form-holder", "user-form",form,user);
+generateBarcode();
+
+$("#id").keyup(function(){
+   generateBarcode();
+});
+
+
+function onClickSave(){
+   var data = {};
+   data.id = {{user.id}};
+   data.userName = $("#userName").val();
+   data.firstName = $("#firstName").val();
+   data.lastName = $("#lastName").val();
+   data.accessLevel = $("#accessLevel").val();
+   console.log(data);
+   API.post("user/{{user.id}}/edit", data, function(){
+      getPageOfUsers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
+   });
+}
+
+function onClickDelete(){
+   API.post("user/{{user.id}}/delete", {}, function(){
+      getPageOfUsers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
+   });
+}
+</script>

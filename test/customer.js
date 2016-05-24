@@ -8,7 +8,8 @@ var Customer = require("../lib/customer.js");
 var testData = {
    "id":3115,
    "firstName": "John",
-   "lastName": "Smith"
+   "lastName": "Smith",
+   "loyaltyPoints": 60
 }
 
 tests.before = function(done){
@@ -57,7 +58,6 @@ module.exports.testGetLastName = function(test){
    test.done();
 }
 
-
 module.exports.testSetLastName = function(test){
    var customer = new Customer(testData);
    customer.setLastName("Doe");
@@ -71,6 +71,21 @@ module.exports.testSetFirstName = function(test){
    customer.setFirstName("Jack");
    test.expect(1);
    test.equal(customer.getFirstName(), "Jack", "Failed to set Customer price");
+   test.done();
+}
+
+module.exports.testGetLoyaltyPoints = function(test){
+   var customer = new Customer(testData);
+   test.expect(1);
+   test.equal(customer.getLoyaltyPoints(), testData.loyaltyPoints, "Failed to get loyalty points of Customer");
+   test.done();
+}
+
+module.exports.testSetLoyaltyPoints = function(test){
+   var customer = new Customer(testData);
+   customer.setLoyaltyPoints(70);
+   test.expect(1);
+   test.equal(customer.getLoyaltyPoints(), "70", "Failed to set Customer Loyalty Points");
    test.done();
 }
 

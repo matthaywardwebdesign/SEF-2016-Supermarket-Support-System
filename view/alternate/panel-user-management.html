@@ -1,0 +1,74 @@
+<div class='panel panel-default'>
+   <h3>User Management</h3>
+   <br>
+   <div class='row'>
+      <div class='col-sm-6'>
+         <button class='btn btn-primary' onclick='Supermarket.loadPanel("user-create?pageAmount={{pageAmount}}&pageOffset={{offset}}")'>Create User</button>
+      </div>
+   </div>
+
+   <br><br>
+   <table class="table table-hover management-items-table">
+      <thead>
+         <tr>
+            <th>ID</th>
+            <th> Logon User Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Access Level</th>
+            <th>Edit</th>
+         </tr>
+      </thead>
+      <tbody>
+         {{#each users}}
+         <tr>
+            <td>{{id}}</td>
+            <td>{{userName}}</td>
+            <td>{{firstName}}</td>
+            <td>{{lastName}}</td>
+            <td>{{accessLevel}}</td>
+            <td>
+               <a href='#' onclick='Supermarket.loadPanel("user/{{id}}/edit?search={{../search}}&pageAmount={{../pageAmount}}&pageOffset={{../offset}}&sort={{../sort}}")'>Edit</a>
+            </td>
+         </tr>
+         {{/each}}
+      </tbody>
+   </table>
+   <br><br>
+   <hr>
+   <div class='row'>
+      <div class='col-sm-4'>
+         {{#if showBackButton}}
+         <button onclick='getPageOfUsers("{{search}}",{{pageAmount}}, {{backOffset}}, "{{sort}}")' class='btn btn-primary'>Back</button>
+         {{/if}}
+      </div>
+      <div class='col-sm-4 text-center' style='line-height:40px;'>
+         Page {{pageNumber}}
+      </div>
+      <div class='col-sm-4 text-right'>
+         {{#if showNextButton}}
+         <button onclick='getPageOfUsers("{{search}}",{{pageAmount}}, {{nextOffset}}, "{{sort}}")' class='btn btn-primary'>Next</button>
+         {{/if}}
+      </div>
+   </div>
+</div>
+<script>
+   function getPageOfUsers(search, amount, offset, sort){
+      if (search != null && search != ""){
+         Supermarket.loadPanel("user-management?search=" + search + "&amount=" + amount + "&offset=" + offset + "&sort=" + sort);
+      } else {
+         Supermarket.loadPanel("user-management?amount=" + amount + "&offset=" + offset + "&sort=" + sort);
+      }
+   }
+
+   function sortUsersBy(sort){
+      getPageOfUsers("{{search}}",{{pageAmount}},{{offset}},sort);
+   }
+
+   function onClickSearch(){
+      var term = encodeURI($("#search").val());
+      Supermarket.loadPanel("user-management?search=" + term + "&amount={{pageAmount}}&offset=0");
+   }
+
+   $("#sort-{{sort}}").css("text-decoration","underline");
+</script>

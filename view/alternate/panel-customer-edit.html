@@ -24,10 +24,12 @@
 var customer = {
    firstName: "{{customer.firstName}}",
    lastName:"{{customer.lastName}}",
+   loyaltyPoints:"{{customer.loyaltyPoints}}",
 };
 var form = [
    {"id":"firstName", "name":"First Name", "type":"text"},
    {"id":"lastName", "name": "Last Name", "type": "text"},
+   {"id":"loyaltyPoints", "name": "Loyalty Points", "type": "number"},
 ];
 Supermarket.createForm("#form-holder", "customer-form",form,customer);
 generateBarcode();
@@ -42,6 +44,7 @@ function onClickSave(){
    data.id = {{customer.id}};
    data.firstName = $("#firstName").val();
    data.lastName = $("#lastName").val();
+   data.loyaltyPoints = $("#loyaltyPoints").val();
    console.log(data);
    API.post("customer/{{customer.id}}/edit", data, function(){
       getPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");

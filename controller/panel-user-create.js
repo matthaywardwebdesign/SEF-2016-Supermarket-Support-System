@@ -1,5 +1,5 @@
-var customers = require("../lib/customers.js");
-var customer = require("../lib/customer.js");
+var users = require("../lib/users.js");
+var User = require("../lib/user.js");
 
 module.exports.run = function(req, res, template){
    var data = {};
