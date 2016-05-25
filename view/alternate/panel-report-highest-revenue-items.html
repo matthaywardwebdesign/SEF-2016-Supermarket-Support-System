@@ -1,0 +1,52 @@
+<div class='panel panel-default'>
+   <h4>Report / Highest Revenue Items</h4>
+   <br>
+   <div id='form-holder'></div>
+   <br>
+   <button class='btn btn-primary' id='generate'>Generate</button>
+   <hr>
+   {{#if generated}}
+   Generated Report - {{niceDateTime generatedTime}}
+   <hr>
+   <table class="table table-hover">
+      <thead>
+         <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Revenue ($)</th>
+         </tr>
+      </thead>
+      <tbody>
+         {{#each sorted}}
+         <tr>
+            <td>{{item.id}}</td>
+            <td><a onclick='Supermarket.showItemDetails({{item.id}})'>{{item.name}}</a></td>
+            <td>{{formatDecimal revenue}}</td>
+         </tr>
+         {{/each}}
+      </tbody>
+   </table>
+   {{/if}}
+</div>
+<script>
+var options = {
+   "startDate": "{{niceDate start}}",
+   "endDate": "{{niceDate end}}",
+   "numItems": {{numItems}}
+}
+var form = [
+   {"id":"startDate", "name": "Start Date", "type":"text"},
+   {"id":"endDate", "name": "End Date", "type":"text"},
+   {"id":"numItems", "name": "Number of Items", "type": "number"}
+];
+Supermarket.createForm("#form-holder", "report-form",form,options);
+$('#startDate').pickadate();
+$('#endDate').pickadate();
+
+$("#generate").click(function(){
+   var startDate = new Date($("#startDate").val()).getTime();
+   var endDate = new Date($("#endDate").val()).getTime();
+   var numItems = parseInt($("#numItems").val());
+   Supermarket.loadPanel("report/highest-revenue-items?start=" + startDate + "&end=" + endDate + "&numItems=" + numItems);
+});
+</script>

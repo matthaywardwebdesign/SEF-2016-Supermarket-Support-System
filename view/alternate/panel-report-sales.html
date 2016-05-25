@@ -1,0 +1,77 @@
+<div class='panel panel-default'>
+   <h4>Report / Sales Report</h4>
+   <br>
+   <div id='form-holder'></div>
+   <br>
+   <button class='btn btn-primary' id='generate'>Generate</button>
+   <hr>
+   {{#if generated}}
+   Generated Report - {{niceDateTime generatedTime}}
+   <hr>
+   <div class='row'>
+      <div class='col-sm-3'>
+         <h1>{{totalTransations}}</h1>
+         <b>Total Transactions</b>
+      </div>
+      <div class='col-sm-3'>
+         <h1>{{itemsSold}}</h1>
+         <b>Total Items</b>
+      </div>
+      <div class='col-sm-3'>
+         <h1>${{formatDecimal totalSales}}</h1>
+         <b>Total Sales</b>
+      </div>
+      <div class='col-sm-3'>
+         <h1>${{formatDecimal totalGST}}</h1>
+         <b>Total GST</b>
+      </div>
+   </div>
+   <hr>
+   <div class='text-center'>
+      <canvas id="report-chart"></canvas>
+   </div>
+   {{/if}}
+</div>
+<script>
+var options = {
+   "startDate": "{{niceDate start}}",
+   "endDate": "{{niceDate end}}"
+}
+var form = [
+   {"id":"startDate", "name": "Start Date", "type":"text"},
+   {"id":"endDate", "name": "End Date", "type":"text"},
+];
+Supermarket.createForm("#form-holder", "report-form",form,options);
+$('#startDate').pickadate();
+$('#endDate').pickadate();
+
+$("#generate").click(function(){
+   var startDate = new Date($("#startDate").val()).getTime();
+   var endDate = new Date($("#endDate").val()).getTime();
+   Supermarket.loadPanel("report/sales?start=" + startDate + "&end=" + endDate);
+});
+
+{{#if generated}}
+var ctx = document.getElementById("report-chart");
+var dates = {{{days}}};
+var data = {{{counts}}};
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: dates,
+        datasets: [{
+            label: 'Sales ($)',
+            tension: 0,
+            data: data,
+            borderColor:"#337ab7",
+            backgroundColor:"rgba(52, 122, 183, 0.42)"
+        }]
+    },
+    options: {
+      scales: {
+         xAxes: [{"type": "time", "time":{"round":"day","tooltipFormat": 'DD/MM/YYYY'}}]
+      }
+   }
+});
+{{/if}}
+</script>
