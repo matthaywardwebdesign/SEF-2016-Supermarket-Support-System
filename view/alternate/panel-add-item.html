@@ -14,7 +14,6 @@
             <thead>
                <tr>
                   <th>Name</th>
-                  <th>ID</th>
                   <th>Price</th>
                   <th>Per</th>
                   <th></th>
@@ -23,12 +22,15 @@
             <tbody>
                {{#each items}}
                <tr>
-                  <td>{{name}}</td>
-                  <td>{{id}}</td>
+                  <td><a onclick='Supermarket.showItemDetails({{id}})'>{{name}}</a></td>
                   <td>{{price}}</td>
                   <td>{{unit}}</td>
                   <td>
+                     {{#if soh}}
                      <button class='btn btn-primary btn-large' onclick='onClickAddItem({{id}},{{isWeighted}})'>Add</button>
+                     {{else}}
+                     Unavailable
+                     {{/if}}
                   </td>
                </tr>
                {{/each}}

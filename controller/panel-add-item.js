@@ -8,6 +8,11 @@ module.exports.run = function(req, res, template){
       data.search = search;
       items.getPageOfSearchItems(search, 50, 0, "name", function (err, items){
          if (err){res.end(err);return;}
+         for (var i = 0; i < items.length; i++){
+            if (items[i].getSOH() == 0){
+               items[i].noStock = true;
+            }
+         }
          data.items = items;
          res.end(template(data));
       });
