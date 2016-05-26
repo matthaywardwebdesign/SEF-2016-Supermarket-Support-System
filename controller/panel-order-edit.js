@@ -21,6 +21,26 @@ module.exports.run = function(req, res, template){
                   }
                   if (remaining == 0){
                      data.order = order;
+                     if (data.order.status == "open"){
+                        data.order.open = true;
+                     }
+
+                     if (data.order.status == "sent"){
+                        data.order.sent = true;
+                     }
+
+                     if (data.order.status == "dispatched"){
+                        data.order.dispatched = true;
+                     }
+
+                     if (data.order.status == "received"){
+                        data.order.received = true;
+                     }
+
+                     if (data.order.status == "open" || data.order.status == "sent"){
+                        data.order.canCancel = true;
+                     }
+
                      res.end(template(data));
                   }
                });

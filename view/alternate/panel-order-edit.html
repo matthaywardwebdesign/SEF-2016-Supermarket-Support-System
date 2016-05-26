@@ -44,16 +44,26 @@
    <div class='col-sm-3'>
       <h5><b>Order Actions</b></h5>
       <br><br>
-      {{#if transaction.open}}
-      <button class='btn btn-danger' onclick='onClickDelete()'>Cancel Transaction</button>
+      {{#if order.canCancel}}
+      <button class='btn btn-danger' onclick='orderAction("cancel")'>Cancel Order</button>
+      <br><br>
+      {{/if}}
+      {{#if order.open}}
+      <button class='btn btn-primary' onclick='orderAction("send")'>Send Order</button>
+      {{/if}}
+      {{#if order.sent}}
+      <button class='btn btn-primary' onclick='orderAction("dispatch")'>Dispatch Order</button>
+      {{/if}}
+      {{#if order.dispatched}}
+      <button class='btn btn-primary' onclick='orderAction("receive")'>Receive Order</button>
       {{/if}}
    </div>
 </div>
 <script>
 
-function onClickDelete(){
-   API.post("order/{{order.id}}/delete", {}, function(){
-      loadPageOfOrders({{pageAmount}},{{pageOffset}});
+function orderAction(action){
+   API.post("order/{{order.id}}/action/" + action, {}, function(){
+      Supermarket.loadPanel("order/{{order.id}}/edit");
    });
 }
 
