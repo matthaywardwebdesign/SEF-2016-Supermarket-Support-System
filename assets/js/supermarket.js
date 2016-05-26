@@ -56,6 +56,12 @@ var Supermarket = {};
       });
    }
 
+   Supermarket.getSupplierByID = function(id, callback){
+      API.get("supplier/" + id, {}, function (data){
+         callback(data);
+      });
+   }
+
    Supermarket.loadBlackoutPanel = function(panel){
       $(".blackout").fadeIn();
       $(".blackout-panel").load("/panel/" + panel);
