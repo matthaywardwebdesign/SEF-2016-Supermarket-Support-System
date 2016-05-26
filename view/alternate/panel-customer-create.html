@@ -63,12 +63,6 @@ function onClickSave(){
    });
 }
 
-function onClickDelete(){
-   API.post("customer/{{customer.id}}/delete", {}, function(){
-      getPageOfCustomers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
-   });
-}
-
 $("#error-id-taken").hide();
 $("#id").change(function(){
    var id = parseInt($("#id").val());
