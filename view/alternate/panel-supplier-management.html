@@ -1,0 +1,70 @@
+<div class='panel panel-default'>
+   <h3>Supplier Management</h3>
+   <br>
+   <div class='row'>
+      <div class='col-sm-6'>
+         <button class='btn btn-primary' onclick='Supermarket.loadPanel("supplier-create?pageAmount={{pageAmount}}&pageOffset={{offset}}")'>Create Supplier</button>
+      </div>
+   </div>
+
+   <br><br>
+   <table class="table table-hover management-items-table">
+      <thead>
+         <tr>
+            <th>ID</th>
+            <th>Supplier Name</th>
+            <th>Supplier Address</th>
+            <th>Edit</th>
+         </tr>
+      </thead>
+      <tbody>
+         {{#each suppliers}}
+         <tr>
+            <td>{{id}}</td>
+            <td>{{supplierName}}</td>
+            <td>{{supplierAddress}}</td>
+            <td>
+               <a href='#' onclick='Supermarket.loadPanel("supplier/{{id}}/edit?search={{../search}}&pageAmount={{../pageAmount}}&pageOffset={{../offset}}&sort={{../sort}}")'>Edit</a>
+            </td>
+         </tr>
+         {{/each}}
+      </tbody>
+   </table>
+   <br><br>
+   <hr>
+   <div class='row'>
+      <div class='col-sm-4'>
+         {{#if showBackButton}}
+         <button onclick='getPageOfSuppliers("{{search}}",{{pageAmount}}, {{backOffset}}, "{{sort}}")' class='btn btn-primary'>Back</button>
+         {{/if}}
+      </div>
+      <div class='col-sm-4 text-center' style='line-height:40px;'>
+         Page {{pageNumber}}
+      </div>
+      <div class='col-sm-4 text-right'>
+         {{#if showNextButton}}
+         <button onclick='getPageOfSuppliers("{{search}}",{{pageAmount}}, {{nextOffset}}, "{{sort}}")' class='btn btn-primary'>Next</button>
+         {{/if}}
+      </div>
+   </div>
+</div>
+<script>
+   function getPageOfSuppliers(search, amount, offset, sort){
+      if (search != null && search != ""){
+         Supermarket.loadPanel("supplier-management?search=" + search + "&amount=" + amount + "&offset=" + offset + "&sort=" + sort);
+      } else {
+         Supermarket.loadPanel("supplier-management?amount=" + amount + "&offset=" + offset + "&sort=" + sort);
+      }
+   }
+
+   function sortSuppliersBy(sort){
+      getPageOfSuppliers("{{search}}",{{pageAmount}},{{offset}},sort);
+   }
+
+   function onClickSearch(){
+      var term = encodeURI($("#search").val());
+      Supermarket.loadPanel("supplier-management?search=" + term + "&amount={{pageAmount}}&offset=0");
+   }
+
+   $("#sort-{{sort}}").css("text-decoration","underline");
+</script>
