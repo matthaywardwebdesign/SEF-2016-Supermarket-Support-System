@@ -1,8 +1,8 @@
 var Supermarket = {};
 (function(){
 
-   Supermarket.createTransaction = function(callback){
-      API.post("transaction", {"customerNo":1}, function(data){
+   Supermarket.createTransaction = function(customer, callback){
+      API.post("transaction", {"customerNo":customer}, function(data){
          callback(data.id);
       });
    }

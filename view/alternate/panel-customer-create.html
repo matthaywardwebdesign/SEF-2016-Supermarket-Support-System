@@ -73,11 +73,7 @@ $("#error-id-taken").hide();
 $("#id").change(function(){
    var id = parseInt($("#id").val());
    Supermarket.getCustomerByID(id, function (customer){
-<<<<<<< HEAD
-      if (item.id != null){
-=======
       if (customer.id != null){
->>>>>>> 63cf4f69475b601b3efd9694dafc6f7ac6b376d5
          $("#error-id-taken .name").text(customer.firstName + " " + customer.lastName);
          $("#error-id-taken").fadeIn();
       } else {

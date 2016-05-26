@@ -1,10 +1,13 @@
 <div class='row'>
    <div class='col-sm-12'>
+      <div id='error' class='alert alert-danger' style='display:none'>
+         Customer with the entered ID doesn't exist
+      </div>
       <h3>Enter Customer Number</h3>
       <br>
       <input class='form-control' type='number' id='customer-number' />
       <br>
-      <button class='btn btn-primary btn-large'>Start</button>
+      <button class='btn btn-primary btn-large' onclick='onClickNew()'>Start</button>
    </div>
 </div>
 <script>
@@ -23,10 +26,24 @@ setInterval(function(){
 $("#customer-number").keypress(function(e){
    if (e.which == 13){
       $("#customer-number").val("");
+      onClickNew();
    }
 });
 
-function onClickCreate(){
-   
+function onClickNew(){
+   $("#error").hide();
+   var customer = parseInt($("#customer-number").val());
+   Supermarket.getCustomerByID(customer, function (customer){
+      if (customer.id != null){
+         Supermarket.say("Hi " + customer.firstName + ". Welcome to RMIT Supermarket. Please scan or lookup an item to begin");
+         Supermarket.createTransaction(customer.id, function (id){
+            Cookies.set('currentTransaction', id);
+            window.location.href = "/items";
+         });
+      } else {
+         $("#error").fadeIn();
+      }
+   });
+
 }
 </script>
