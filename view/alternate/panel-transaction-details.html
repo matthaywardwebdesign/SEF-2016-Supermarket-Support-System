@@ -38,6 +38,16 @@
             </tr>
             {{/each}}
             {{/each}}
+            {{#if transaction.loyaltyDiscount}}
+            <tr class='grey text-right'>
+               <td></td>
+               <td class='text-left'>Loyalty Discount</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td>-{{formatDecimal transaction.loyaltyDiscount}}</td>
+            </tr>
+            {{/if}}
          </tbody>
       </table>
    </div>
