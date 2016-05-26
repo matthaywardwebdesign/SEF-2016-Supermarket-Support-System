@@ -1,0 +1,60 @@
+<button class='btn btn-primary' onclick='loadPageOfOrders({{pageAmount}},{{pageOffset}})'>Back</button>
+<br><br>
+<div class='row'>
+   <div class='col-sm-9'>
+      <h4>Order - {{order.id}}</h4>
+      <br>
+      <b>Date: </b>{{niceDateTime order.date}}
+      <hr>
+      <div class='row'>
+         <div class='col-sm-3'>
+            <h2>{{order.numberOfItems}}</h2>
+            <b>Number of Items</b>
+         </div>
+         <div class='col-sm-3'>
+            <h2>{{{orderStatus order.status}}}</h2>
+            <b>Status</b>
+         </div>
+      </div>
+      <br>
+      <hr>
+      <table class="table table-hover">
+         <thead>
+            <tr>
+               <th>Qty</th>
+               <th>Product Name</th>
+               <th>Product No</th>
+               <th>Price</th>
+               <th>Unit</th>
+            </tr>
+         </thead>
+         <tbody>
+            {{#each order.items}}
+            <tr class='text-right'>
+               <td class='text-left'>{{qty}}</td>
+               <td class='text-left'><a href='#' onclick='Supermarket.showItemDetails({{item.id}})'>{{item.name}}</a></td>
+               <td>{{item.id}}</td>
+               <td>{{formatDecimal item.price}}</td>
+               <td>{{item.unit}}</td>
+            </tr>
+            {{/each}}
+         </tbody>
+      </table>
+   </div>
+   <div class='col-sm-3'>
+      <h5><b>Order Actions</b></h5>
+      <br><br>
+      {{#if transaction.open}}
+      <button class='btn btn-danger' onclick='onClickDelete()'>Cancel Transaction</button>
+      {{/if}}
+   </div>
+</div>
+<script>
+
+function onClickDelete(){
+   API.post("order/{{order.id}}/delete", {}, function(){
+      loadPageOfOrders({{pageAmount}},{{pageOffset}});
+   });
+}
+
+</script>

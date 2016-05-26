@@ -1,3 +1,51 @@
 <div class='panel panel-default'>
    <h3>Orders</h3>
+   <small><b>Note: </b>Orders cannot be created manually, they are created by the system automatically</small>
+   <br><br>
+   <table class="table table-hover">
+      <thead>
+         <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Items</th>
+            <th>Status</th>
+            <th>View</th>
+         </tr>
+      </thead>
+      <tbody>
+         {{#each orders}}
+         <tr>
+            <td>{{id}}</td>
+            <td>{{niceDate date}}</td>
+            <td>{{numberOfItems}}</td>
+            <td>{{{orderStatus status}}}</td>
+            <td>
+               <a href='#' onclick='Supermarket.loadPanel("order/{{id}}/edit?pageAmount={{../pageAmount}}&pageOffset={{../offset}}")'>View</a>
+            </td>
+         </tr>
+         {{/each}}
+      </tbody>
+   </table>
+   <br><br>
+   <hr>
+   <div class='row'>
+      <div class='col-sm-4'>
+         {{#if showBackButton}}
+         <button onclick='loadPageOfOrders({{pageAmount}}, {{backOffset}})' class='btn btn-primary'>Back</button>
+         {{/if}}
+      </div>
+      <div class='col-sm-4 text-center' style='line-height:40px;'>
+         Page {{pageNumber}}
+      </div>
+      <div class='col-sm-4 text-right'>
+         {{#if showNextButton}}
+         <button onclick='loadPageOfOrders({{pageAmount}}, {{nextOffset}})' class='btn btn-primary'>Next</button>
+         {{/if}}
+      </div>
+   </div>
 </div>
+<script>
+   function loadPageOfOrders(amount, offset){
+      Supermarket.loadPanel("orders?amount=" + amount + "&offset=" + offset);
+   }
+</script>

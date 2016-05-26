@@ -7,6 +7,8 @@ var transactions = require("./lib/transactions.js");
 var Transaction = require("./lib/transaction.js");
 var specials = require("./lib/specials.js");
 var Special = require("./lib/special.js");
+var orders = require("./lib/orders.js");
+var Order = require("./lib/order.js");
 var api = require("./lib/api.js");
 process.env.TZ = "Australia/Melbourne";
 
