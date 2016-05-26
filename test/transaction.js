@@ -9,7 +9,7 @@ var Item = require("../lib/item.js");
 
 var testData = {
    "id":40,
-   "customerNo":55,
+   "customerNo":1,
    "date": "Thu Apr 21 2016 10:08:05 GMT+1000 (AEST)",
    "gst":2.90,
    "paymentType":"credit",
