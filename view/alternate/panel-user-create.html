@@ -44,6 +44,7 @@ var form = [
    {"id":"userName", "name":"User Login Name", "type":"text"},
    {"id":"firstName", "name":"First Name", "type":"text"},
    {"id":"lastName", "name":"Last Name", "type":"text"},
+   {"id":"password", "name":"Password", "type": "password"}
 ];
 Supermarket.createForm("#form-holder", "user-form",form,user);
 generateBarcode();
@@ -69,6 +70,7 @@ function onClickSave(){
    data.firstName = $("#firstName").val();
    data.lastName = $("#lastName").val();
    data.accessLevel = $("#accessLevel").val();
+   data.password = $("#password").val();
 
    console.log(data);
    console.log("User " + data.firstName + " Created");
