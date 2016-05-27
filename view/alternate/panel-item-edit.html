@@ -44,6 +44,7 @@ var item = {
    ean:"{{item.ean}}",
    weighted: {{item.isWeighted}},
    gstApplicable: {{item.gstApplicable}}
+   supplier: "{{item.supplier}}"
 };
 var form = [
    {"id":"name", "name":"Name", "type":"text"},
@@ -51,6 +52,7 @@ var form = [
    {"id":"ean", "name": "EAN (Barcode)", "type": "number"},
    {"id":"weighted", "name": "Is Weighted", "type":"checkbox"},
    {"id":"gstApplicable", "name": "Is GST Applicable", "type":"checkbox"}
+   {"id":"supplier", "name": "Item Supplier", "type": "select", "values":{{{suppliers}}} } 
 ];
 Supermarket.createForm("#form-holder", "item-form",form,item);
 generateBarcode();
