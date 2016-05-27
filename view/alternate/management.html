@@ -1,11 +1,11 @@
 <ul class="nav nav-tabs">
-  <li class='active'><a id='tab-item-management' onclick='loadTab("item-management")'>Items</a></li>
-  <li><a id='tab-transaction-management' onclick='loadTab("transaction-management")'>Transactions</a></li>
-  <li><a id='tab-specials' onclick='loadTab("specials")'>Specials / Promotions</a></li>
-  <li><a id='tab-reports' onclick='loadTab("reports")'>Reports</a></li>
-  <li><a id='tab-orders' onclick='loadTab("orders")'>Orders</a></li>
-  <li><a id='tab-customer-management' onclick='loadTab("customer-management")'>Customers</a></li>
-  <li><a id='tab-user-management' onclick='loadTab("user-management")'>Users</a></li>
+  {{#if accessItems}}<li><a id='tab-item-management' onclick='loadTab("item-management")'>Items</a></li>{{/if}}
+  {{#if accessTransactions}}<li><a id='tab-transaction-management' onclick='loadTab("transaction-management")'>Transactions</a></li>{{/if}}
+  {{#if accessSpecials}}<li><a id='tab-specials' onclick='loadTab("specials")'>Specials / Promotions</a></li>{{/if}}
+  {{#if accessReports}} <li><a id='tab-reports' onclick='loadTab("reports")'>Reports</a></li>{{/if}}
+  {{#if accessOrders}}<li><a id='tab-orders' onclick='loadTab("orders")'>Orders</a></li>{{/if}}
+  {{#if accessCustomers}}<li><a id='tab-customer-management' onclick='loadTab("customer-management")'>Customers</a></li>{{/if}}
+  {{#if accessUsers}}<li><a id='tab-user-management' onclick='loadTab("user-management")'>Users</a></li>{{/if}}
   <li><a id='tab-settings' onclick='loadTab("settings")'>Settings</a></li>
 </ul>
 <br>
@@ -23,5 +23,13 @@ function loadTab(tab){
    tab = tab.split("?")[0];
    $("#tab-" + tab).parent().addClass("active");
 }
+{{#if accessLevelSales}}
+Supermarket.loadPanel("transaction-management");
+{{/if}}
+{{#if accessLevelWarehouse}}
+Supermarket.loadPanel("orders");
+{{/if}}
+{{#if accessLevelManager}}
 Supermarket.loadPanel("item-management");
+{{/if}}
 </script>

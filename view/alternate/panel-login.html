@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+   <h3>Login</h3>
+   <br>
+   <div id='error' class='alert alert-danger' style='display:none'>
+      Incorrect Username or Password
+   </div>
+   <br>
+   <div id='form-holder'>
+
+   </div>
+   <br>
+   <button onclick='login()' class='btn btn-primary btn-large'>Login</button>
+</div>
+<script>
+var form = [
+   {"id":"username", "name":"Username", "type":"text"},
+   {"id":"password", "name":"Password", "type":"password"}
+];
+Supermarket.createForm("#form-holder", "login-form",form,{});
+function login(){
+   $("#error").hide();
+   var username = $("#username").val();
+   var password = $("#password").val();
+   Supermarket.authUser(username, password, function(token){
+      if (token != null){
+         window.location.href = "/management?token=" + token;
+      } else {
+         $("#error").fadeIn();
+      }
+   });
+}
+</script>

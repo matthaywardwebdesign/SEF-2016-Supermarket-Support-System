@@ -44,6 +44,12 @@ var Supermarket = {};
       });
    }
 
+   Supermarket.authUser = function(username, password, callback){
+      API.post("user/login", {username: username,password:password}, function (result){
+         callback(result.token);
+      });
+   }
+
    Supermarket.getItemByEAN = function(ean, callback){
       API.get("item/ean/" + ean, {}, function (data){
          callback(data);
