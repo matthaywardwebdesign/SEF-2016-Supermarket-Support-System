@@ -1,0 +1,10 @@
+
+Running Local NodeUnit Mac:
+
+1] Open your favorite terminal program.
+
+2] Install NodeUnit by running the command "npm install nodeunit -g" (without quotes)
+
+3] Navigate to the local directory and enter the command "sudo make install" (without quotes) to install the basic command line test runner
+
+3] In the local directory, enter the command "nodeunit" (without quotes) to execute all test cases in the directory. Or enter the command "nodeunit filename.extension" (without quotes) to execute tests on just that file. Or enter the command "nodeunit filename.extension folder[...]" (without quotes) to execute tests on a particular folder. 
