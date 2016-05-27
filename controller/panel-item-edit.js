@@ -1,5 +1,7 @@
 var items = require("../lib/items.js");
 var item = require("../lib/item.js");
+var suppliers = require("../lib/suppliers.js");
+var supplier = require("../lib/supplier.js");
 
 module.exports.run = function(req, res, template){
    var data = {};
@@ -13,7 +15,14 @@ module.exports.run = function(req, res, template){
          res.end(err);
       } else {
          data.item = item;
-         res.end(template(data));
+         suppliers.getAllSuppliers(function(err, result){
+            var options = [];
+            for(var i = 0; i < result.length; i++ ){
+               options.push({"label":result[i].supplierName, "value":result[i].id});
+            }
+            data.suppliers = options;
+            res.end(template(data));
+         });
       }
    });
 }
