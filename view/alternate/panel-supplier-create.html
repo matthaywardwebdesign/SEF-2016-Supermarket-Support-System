@@ -1,0 +1,77 @@
+<button class='btn btn-primary' onclick='getPageOfSuppliers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}")'>Back</button>
+<br><br>
+<div class='row'>
+   <div class='col-sm-9'>
+      <h4>Create Supplier</h4>
+      <br>
+      <div id='error-id-taken' class='alert alert-danger'>
+         This ID is already being used by <b><span class='name'></span></b><br>
+         Continuing to use this ID will overwrite that suppliers information.
+      </div>
+      <br>
+      <div id='form-holder'>
+
+      </div>
+      <br><br>
+   </div>
+   <div class='col-sm-3'>
+      <h5><b>Supplier Actions</b></h5>
+      <br><br>
+      <button class='btn btn-success' onclick='onClickSave()'>Create Supplier</button>
+      <br><br>
+      <img id="barcode"/>
+   </div>
+</div>
+<script>
+var supplier = {
+   id: 0,
+   supplierName: '',
+   supplierAddress:'',
+};
+var form = [
+   {"id":"id", "name":"Supplier ID", "type":"number"},
+   {"id":"supplierName", "name":"Supplier Name", "type":"text"},
+   {"id":"supplierAddress", "name":"Supplier Address", "type":"text"},
+];
+Supermarket.createForm("#form-holder", "supplier-form",form,supplier);
+generateBarcode();
+
+$("#id").keyup(function(){
+   generateBarcode();
+});
+
+function generateBarcode(){
+   if ($("#id").val().length > 0){
+      if ($("#id").val().length == 13){
+         $("#barcode").JsBarcode($("#id").val(), {format: "ean13"});
+      } else {
+         $("#barcode").JsBarcode($("#id").val());
+      }
+   }
+}
+
+function onClickSave(){
+   var data = {};
+   data.id = parseInt($("#id").val());
+   data.supplierName = $("#supplierName").val();
+   data.supplierAddress = $("#supplierAddress").val();
+
+   console.log(data);
+   API.post("supplier/" + data.id + "/edit", data, function(){
+      getPageOfSuppliers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
+   });
+}
+
+$("#error-id-taken").hide();
+$("#id").change(function(){
+   var id = parseInt($("#id").val());
+   Supermarket.getSupplierByID(id, function (supplier){
+      if (supplier.id != null){
+         $("#error-id-taken .name").text(supplier.supplierName);
+         $("#error-id-taken").fadeIn();
+      } else {
+         $("#error-id-taken").fadeOut();
+      }
+   });
+});
+</script>

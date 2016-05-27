@@ -16,6 +16,7 @@ module.exports.run = function(req, res, next, template){
          data.accessLevelWarehouse = true;
          data.accessOrders = true;
          data.accessItems = true;
+         data.accessSuppliers = true;
       }
       if (accessLevel == "manager"){
          data.accessLevelManager = true;
@@ -26,6 +27,7 @@ module.exports.run = function(req, res, next, template){
          data.accessReports = true;
          data.accessCustomers = true;
          data.accessUsers = true;
+         data.accessSuppliers = true;
       }
       res.write(template(data));
       next();

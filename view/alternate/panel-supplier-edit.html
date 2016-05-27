@@ -1,0 +1,56 @@
+<button class='btn btn-primary' onclick='getPageOfSuppliers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}")'>Back</button>
+<br><br>
+<div class='row'>
+   <div class='col-sm-9'>
+      <h4>Edit Supplier - {{supplier.supplierName}}</h4>
+      <b>Supplier ID: {{supplier.id}}</b>
+      <br><br>
+      <div id='form-holder'>
+
+      </div>
+      <br><br>
+   </div>
+   <div class='col-sm-3'>
+      <h5><b>Supplier Actions</b></h5>
+      <br><br>
+      <button class='btn btn-success' onclick='onClickSave()'>Save Supplier</button>
+      <br><br>
+      <button class='btn btn-danger' onclick='onClickDelete()'>Delete Supplier</button>
+      <br><br>
+      <img id="barcode"/>
+   </div>
+</div>
+<script>
+var supplier = {
+   supplierName: "{{supplier.supplierName}}",
+   supplierAddress:"{{supplier.supplierAddress}}",
+};
+var form = [
+   {"id":"supplierName", "name":"Supplier Name", "type":"text"},
+   {"id":"supplierAddress", "name": "Supplier Address", "type": "text"},
+];
+Supermarket.createForm("#form-holder", "supplier-form",form,supplier);
+generateBarcode();
+
+$("#id").keyup(function(){
+   generateBarcode();
+});
+
+
+function onClickSave(){
+   var data = {};
+   data.id = {{supplier.id}};
+   data.supplierName = $("#supplierName").val();
+   data.supplierAddress = $("#supplierAddress").val();
+   console.log(data);
+   API.post("supplier/{{supplier.id}}/edit", data, function(){
+      getPageOfSuppliers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
+   });
+}
+
+function onClickDelete(){
+   API.post("supplier/{{supplier.id}}/delete", {}, function(){
+      getPageOfSuppliers("{{search}}",{{pageAmount}},{{pageOffset}},"{{sort}}");
+   });
+}
+</script>
